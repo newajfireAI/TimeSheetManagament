@@ -7,7 +7,7 @@ import { FaCaretDown } from "react-icons/fa";
 const page = () => {
   return (
     <div>
-        <Container>
+        
             <form className='py-8'>
                 <div className='flex flex-col gap-2 '>
                 <label className='font-roboto text-[16px]'>Name <span className='text-[#F46B6A]'>*</span></label>
@@ -100,7 +100,7 @@ const page = () => {
 
 
 
-        </Container>
+        
       
     </div>
   )
