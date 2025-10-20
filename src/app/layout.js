@@ -33,18 +33,18 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} antialiased `}
       >
         {/* Header =------------------ */}
-        <section className="fixed w-full">
+        <section className=" w-full">
 
           <Navbar/>
 
         </section>
         {/* Header =------------------ */}
 
-        <div className="flex items-center w-full">
+        <div className="fixed flex items-center w-full">
           
           <Sidebar />
 
-          <div className="mt-[80px] w-full h-screen bg-amber-300">
+          <div className="flex-1 h-screen bg-amber-300">
             {children}
           </div>
         </div>
