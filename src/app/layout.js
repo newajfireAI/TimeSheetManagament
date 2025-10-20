@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -24,20 +25,29 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  
+  
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} antialiased `}
       >
         {/* Header =------------------ */}
-        <section>
+        <section className="fixed w-full">
+
           <Navbar/>
+
         </section>
-        <aside>
-          <Sidebar/>
-        </aside>
         {/* Header =------------------ */}
-        {children}
+
+        <div className="flex items-center w-full">
+          
+          <Sidebar />
+
+          <div className="mt-[80px] w-full h-screen bg-amber-300">
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   );
