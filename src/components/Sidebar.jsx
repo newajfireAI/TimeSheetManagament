@@ -4,9 +4,11 @@ import { MdSpaceDashboard, MdOutlineAccessTimeFilled, MdOutlineCalendarMonth, Md
 import { LuSquareActivity } from "react-icons/lu";
 import { FaUserLarge } from "react-icons/fa6";
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 function Sidebar() {
     const [fullview, setFullView] = useState(true) // TODO: we have to make it false
+    const Pathname = usePathname()
 
     const NavLinks = [
         {
@@ -15,29 +17,31 @@ function Sidebar() {
             pathname: '/dashboard'
         },
         {
-            Title: 'Dashboard',
+            Title: 'Add User',
             Icon: <FaUserLarge />,
-            pathname: '/dashboard'
+            pathname: '/user'
         },
         {
-            Title: 'Dashboard',
-            Icon: <MdOutlineAccessTimeFilled />,
-            pathname: '/dashboard'
-        },
-        {
-            Title: 'Dashboard',
+            Title: 'Time sheet',
             Icon: <MdOutlineCalendarMonth />,
-            pathname: '/dashboard'
+            pathname: '/Timesheet'
         },
+
         {
-            Title: 'Dashboard',
+            Title: 'Scheduler',
+            Icon: <MdOutlineAccessTimeFilled />,
+            pathname: '/scheduler'
+        },
+        
+        {
+            Title: 'Activity',
             Icon: <LuSquareActivity  />,
-            pathname: '/dashboard'
+            pathname: '/activity'
         },
         {
-            Title: 'Dashboard',
+            Title: 'Settings',
             Icon: <MdSettings  />,
-            pathname: '/dashboard'
+            pathname: '/settings'
         }
     ]
   return (
@@ -45,7 +49,7 @@ function Sidebar() {
         <ul className='flex flex-col items-center gap-9 mt-6 pt-6 border-t-2 border-[#CED2E5]'>
             {
                 NavLinks.map((navlink, idx)=>
-                <li className='text-2xl text-[#0C0C0D] text-center' key={idx}>
+                <li className={`${Pathname === navlink.pathname ? 'text-white' : 'text-[#0C0C0D]' }text-2xl  text-center`} key={idx}>
                     <Link href={navlink.pathname}>
                     {navlink.Icon}
                     </Link>
