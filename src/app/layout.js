@@ -47,6 +47,7 @@ export default function RootLayout({ children }) {
           <div className="mt-[80px] w-full h-screen bg-amber-300">
             {children}
           </div>
+          
         </div>
       </body>
     </html>
