@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 
 
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -25,29 +26,29 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  
-  
+
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} antialiased `}
       >
         {/* Header =------------------ */}
-        <section className="fixed w-full">
+        <section className=" w-full">
 
-          <Navbar/>
+          <Navbar />
 
         </section>
         {/* Header =------------------ */}
 
-        <div className="flex items-center w-full">
-          
-          <Sidebar />
-
-          <div className="mt-[80px] w-full h-screen bg-amber-300">
+        <div className="fixed flex items-center justify-between w-screen h-screen">
+          <div className="w-[5%] h-full">
+            <Sidebar />
+          </div>
+          <div className=" w-[95%] h-full">
             {children}
           </div>
-          
+
         </div>
       </body>
     </html>

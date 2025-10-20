@@ -1,4 +1,4 @@
-import Container from '@/components/Container'
+import Container from '@/components/container'
 import React from 'react'
 import { MdModeEdit } from "react-icons/md";
 import { FaCaretDown } from "react-icons/fa";
