@@ -24,11 +24,11 @@ export default function RootLayout({ children }) {
       >
         {/* Header =------------------ */}
         <section>
-          <nav>nav bar</nav>
+          <nav>navbar</nav>
         </section>
         <aside>
           <div>
-            Side bar
+            Sidebar
           </div>
         </aside>
         {/* Header =------------------ */}
