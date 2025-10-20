@@ -1,12 +1,15 @@
-import React from 'react'
+"use client";
+import React, { useState } from 'react'
 
-const container = ({children,className}) => {
+const Container = ({children,className}) => {
+  const [fullview, setFullView] = useState(true)
+  
   return (
-    <div className={`max-w-[1264px] mx-auto `}>
+    <div className={`max-w-[1264px] mx-auto ${className} `}>
         {children}
       
     </div>
   )
 }
 
-export default container
+export default Container
