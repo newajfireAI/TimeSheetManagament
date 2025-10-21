@@ -7,49 +7,53 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 function Sidebar() {
-    const [fullview, setFullView] = useState(true) // TODO: we have to make it false
+    const [active, setActive] = useState(false) 
     const Pathname = usePathname()
 
     const NavLinks = [
         {
-            Title: 'Dashboard',
+            Title: 'dashboard',
             Icon: <MdSpaceDashboard />,
             pathname: '/dashboard'
         },
         {
-            Title: 'Add User',
+            Title: 'user',
             Icon: <FaUserLarge />,
             pathname: '/user'
         },
         {
-            Title: 'Time sheet',
+            Title: 'timesheet',
             Icon: <MdOutlineCalendarMonth />,
-            pathname: '/Timesheet'
+            pathname: '/timesheet'
         },
 
         {
-            Title: 'Scheduler',
+            Title: 'scheduler',
             Icon: <MdOutlineAccessTimeFilled />,
             pathname: '/scheduler'
         },
         
         {
-            Title: 'Activity',
+            Title: 'activity',
             Icon: <LuSquareActivity  />,
             pathname: '/activity'
         },
         {
-            Title: 'Settings',
+            Title: 'settings',
             Icon: <MdSettings  />,
             pathname: '/settings'
         }
     ]
+
+    
+    // `/${navlink.pathname}`
+    
   return (
     <div className={`bg-[#5069E5] w-[5%] h-full px-4 py-6 fixed flex justify-center`}>
         <ul className='flex flex-col items-center gap-9 mt-6 pt-6 border-t-2 border-[#CED2E5]'>
             {
                 NavLinks.map((navlink, idx)=>
-                <li className={`${Pathname === navlink.pathname ? 'text-white' : 'text-[#0C0C0D]' }text-2xl  text-center`} key={idx}>
+                <li className={`${Pathname === navlink.pathname ? 'text-white' : 'text-[#0C0C0D]'} text-2xl text-center`} key={idx}>
                     <Link href={navlink.pathname}>
                     {navlink.Icon}
                     </Link>
