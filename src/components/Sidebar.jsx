@@ -1,13 +1,14 @@
 "use client";
 import React, { useState } from 'react'
-import { MdSpaceDashboard, MdOutlineAccessTimeFilled, MdOutlineCalendarMonth, MdSettings   } from "react-icons/md";
+import { MdSpaceDashboard, MdOutlineAccessTimeFilled, MdOutlineCalendarMonth, MdSettings } from "react-icons/md";
 import { LuSquareActivity } from "react-icons/lu";
 import { FaUserLarge } from "react-icons/fa6";
+import { IoLogOut } from "react-icons/io5";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 function Sidebar() {
-    const [active, setActive] = useState(false) 
+    const [active, setActive] = useState(false)
     const Pathname = usePathname()
 
     const NavLinks = [
@@ -32,37 +33,45 @@ function Sidebar() {
             Icon: <MdOutlineAccessTimeFilled />,
             pathname: '/scheduler'
         },
-        
+
         {
             Title: 'activity',
-            Icon: <LuSquareActivity  />,
+            Icon: <LuSquareActivity />,
             pathname: '/activity'
         },
         {
             Title: 'settings',
-            Icon: <MdSettings  />,
+            Icon: <MdSettings />,
             pathname: '/settings'
         }
     ]
 
-    
-    // `/${navlink.pathname}`
-    
-  return (
-    <div className={`bg-[#5069E5] w-[5%] h-full px-4 py-6 fixed flex justify-center`}>
-        <ul className='flex flex-col items-center gap-9 mt-6 pt-6 border-t-2 border-[#CED2E5]'>
-            {
-                NavLinks.map((navlink, idx)=>
-                <li className={`${Pathname === navlink.pathname ? 'text-white' : 'text-[#0C0C0D]'} text-2xl text-center`} key={idx}>
-                    <Link href={navlink.pathname}>
-                    {navlink.Icon}
+    return (
+        <div className={`bg-[#5069E5] w-[100%] h-[100%] px-4 py-6 flex flex-col justify-between`}>
+            <div className=' w-full'>
+                <ul className="flex flex-col items-center gap-8 mt-6 pt-6 border-t border-[#CED2E5] w-full">
+                    {NavLinks.map((navlink, idx) => (
+                        <li
+                            key={idx}
+                            className={`w-full text-center text-2xl transition-colors duration-200 ${Pathname === navlink.pathname ? "text-white" : "text-[#0C0C0D]"
+                                } hover:text-white`}
+                        >
+                            <Link href={navlink.pathname} className="flex flex-col items-center">
+                                {navlink.Icon}
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <div>
+                <p className={`${Pathname === '/logout' ? "text-white" : "text-[#0C0C0D]" } text-2xl text-center`}>
+                    <Link className="flex flex-col items-center" href={'/logout'}>
+                        <IoLogOut />
                     </Link>
-                </li>
-                )
-            }
-        </ul>
-    </div>
-  )
+                </p>
+            </div>
+        </div>
+    )
 }
 
 export default Sidebar
