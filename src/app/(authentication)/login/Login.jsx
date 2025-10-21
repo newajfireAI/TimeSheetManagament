@@ -23,12 +23,12 @@ export default function Login() {
 
                         <fieldset className="fieldset text-black">
                             <legend className="fieldset-legend text-black">Email</legend>
-                            <input type="text" className="input border-[#CED2E5] bg-white w-full -mt-1 text-black focus:outline-none" placeholder="example@gmail.com" />
+                            <input type="text" className="input py-4 border-[#CED2E5] bg-white w-full -mt-1 text-black focus:outline-none" placeholder="example@gmail.com" />
                         </fieldset>
 
                         <fieldset className="fieldset text-black relative">
                             <legend className="fieldset-legend text-black">Password</legend>
-                            <input type={`${viewPass ? "text" : "password"}`} className="input border-[#CED2E5] bg-white w-full -mt-1  focus:outline-none pr-8" placeholder="Enter your password" />
+                            <input type={`${viewPass ? "text" : "password"}`} className="input py-4 border-[#CED2E5] bg-white w-full -mt-1  focus:outline-none pr-8" placeholder="Enter your password" />
                             <p className='absolute z-20 top-1/2 right-2 -translate-y-1/2 text-xl text-[#6D6E73]' onClick={()=> setViewPass(!viewPass)}>{viewPass? <AiFillEye /> : <AiFillEyeInvisible />}</p>
                         </fieldset>
                         <div className='flex items-center gap-x-2 mb-8'>
@@ -43,7 +43,7 @@ export default function Login() {
                     </form>
 
                     <div className='text-center text-base text-black space-y-2'>
-                        <p className='text-[#0D2080]'><Link href={'/login/forgot-password'}>Forgot password?</Link></p>
+                        <p className='text-[#0D2080]'><Link href={'/forgot-password'}>Forgot password?</Link></p>
                         <p>Don't have an account ? <span className='text-[#0D2080]'><Link href={'/signup'}>Sign up</Link></span></p>
                     </div>
                 </div>

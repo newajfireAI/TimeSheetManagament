@@ -15,8 +15,9 @@ function WebLayout({ children }) {
             {
                 ((pathname !== '/') &&
                 (pathname !== '/login') &&
-                (pathname !== '/') &&
-                (pathname !== '/login/forgot-password') &&
+                (pathname !== '/forgot-password') &&
+                (pathname !== '/send-otp') &&
+                (pathname !== '/change-password') &&
                 (pathname !== '/signup')) ?
                     <>
                         {/* Header */}
