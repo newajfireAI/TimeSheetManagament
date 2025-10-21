@@ -1,7 +1,7 @@
 import { Geist, Geist_Mono, Roboto } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Sidebar from "@/components/Sidebar";
+import WebLayout from "@/components/WebLayout";
+
 
 
 
@@ -27,29 +27,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
 
-
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} antialiased `}
       >
-        {/* Header =------------------ */}
-        <section className="w-full h-[80px]">
 
-          <Navbar />
-
-        </section>
-        {/* Header =------------------ */}
-
-        <div className="fixed flex items-center justify-between w-screen h-[calc(100vh-80px)] ">
-          <div className="w-[5%] h-full">
-            <Sidebar />
-          </div>
-          <div className="w-[95%] px-12 pt-12 bg-[#F0F0F2] h-full overflow-y-scroll hide-scrollbar">
-            {children}
-          </div>
-
-        </div>
+        <WebLayout>{children}</WebLayout>
+        
       </body>
     </html>
   );

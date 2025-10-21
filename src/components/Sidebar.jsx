@@ -8,7 +8,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 function Sidebar() {
-    const [active, setActive] = useState(false)
     const Pathname = usePathname()
 
     const NavLinks = [
@@ -65,7 +64,7 @@ function Sidebar() {
             </div>
             <div>
                 <p className={`${Pathname === '/logout' ? "text-white" : "text-[#0C0C0D]" } text-2xl text-center`}>
-                    <Link className="flex flex-col items-center" href={'/logout'}>
+                    <Link className="flex flex-col items-center" href={'/login'}>
                         <IoLogOut />
                     </Link>
                 </p>
