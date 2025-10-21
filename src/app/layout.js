@@ -45,7 +45,7 @@ export default function RootLayout({ children }) {
           <div className="w-[5%] h-full">
             <Sidebar />
           </div>
-          <div className="w-[95%] px-12 pt-12 bg-[#F0F0F2] h-full">
+          <div className="w-[95%] px-12 pt-12 bg-[#F0F0F2] h-full overflow-y-scroll hide-scrollbar">
             {children}
           </div>
 
