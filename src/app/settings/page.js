@@ -1,7 +1,9 @@
-import React from 'react'
+import SettingsLayout from './SettingsLayout'
 
-export default function settings() {
+export default function settings({children}) {
+
+ 
   return (
-    <div>This is Settings page</div>
+    <SettingsLayout>{children}</SettingsLayout>
   )
 }
