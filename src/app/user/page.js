@@ -19,8 +19,8 @@ const page = () => {
 
 
   return (
-    <div >
-      <form className="py-8">
+    <div className="relative" >
+      <form className="py-8 ">
         <div className="flex flex-col gap-2 ">
           <label className="font-roboto text-[#000000] text-[16px]">
             Name <span className="text-[#F46B6A]">*</span>
@@ -170,6 +170,13 @@ const page = () => {
         <button className="bg-[#FFF7F7] py-[14px] px-8 text-[#F46B6A] font-roboto rounded font-semibold">
           Cancel
         </button>
+      </div>
+
+      <div className="w-full bg-green-300 absolute top-1/2 -translate-y-1/2 ">
+        <div className="bg-white w-[150px] h-20 mx-auto">
+          1
+        </div>
+
       </div>
 
     </div>
