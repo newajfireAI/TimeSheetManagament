@@ -10,6 +10,16 @@ import Link from "next/link";
 
 const page = () => {
   const [showPass, setShowPass] = useState(false);
+<<<<<<< HEAD
+  const [showNewPass, setShowNewPass] = useState(false);
+  const [Role, setRole] = useState("User");
+  const [showRole, setShowRole] = useState(false);
+  const [Gender, setGender] = useState("Male");
+  const [showGender, setShowGender] = useState(false);
+
+  const roles = ["User", "Vender", "Employee"];
+  const gender = ["Male", "Female", "Others"];
+=======
   // const [showNewPass, setShowNewPass] = useState(false);
   const [Role,setRole] = useState("User");
    const [showRole,setShowRole] = useState(false);
@@ -18,6 +28,7 @@ const page = () => {
 
   const roles= ["User","Vendor","Employee" ];
   const gender= ["Male","Female","Others" ];
+>>>>>>> d530ae4e7dbd1afe943aecf6a9e8003e2e8e4461
   const [open, setOpen] = useState(false);
 
 
@@ -66,29 +77,61 @@ const page = () => {
               Gender<span className="text-[#F46B6A]">*</span>
             </label>
             <div className="relative"
-            onClick={() => setShowGender(!showGender)}
+              onClick={() => setShowGender(!showGender)}
             >
               <input
-              readOnly
+                readOnly
                 className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
                 placeholder={Gender}
               />
               <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
+<<<<<<< HEAD
+                {showGender ? <FaCaretUp /> : <FaCaretDown />}
+              </div>
+              <div className={`w-full text-center bg-white font-inter text-[14px] text-[#333333] z-30 absolute ${showGender ? "opacity-100 h-auto visible overflow-auto" : "opacity-0 h-0 invisible overflow-hidden"}`}>
+                {gender.map((item) => (
+                  <div key={item} onClick={() => { setGender(item); setShowGender(false); }} className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer">{item}</div>
+                ))}
+=======
                 {showGender? <FaCaretUp />:<FaCaretDown />}
             </div>
             <div className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${showGender ? "opacity-100 h-auto visible overflow-auto" : "opacity-0 h-0 invisible overflow-hidden"}`}>
                   {gender.map((item) => (
                     <div key={item} onClick={() => { setGender(item); setShowGender(false); }} className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer">{item}</div>
                   ))}
+>>>>>>> d530ae4e7dbd1afe943aecf6a9e8003e2e8e4461
               </div>
             </div>
           </div>
         </div>
 
-        
+
 
         <div className="flex justify-between gap-[2%] mt-4 ">
 
+<<<<<<< HEAD
+          <div className="flex flex-col gap-2 mt-4 w-full">
+            <label className="font-roboto text-[#000000] text-[16px]">
+              Role<span className="text-[#F46B6A]">*</span>
+            </label>
+            <div className="relative"
+              onClick={() => setShowRole(!showRole)}
+            >
+              <div >
+
+                <input
+                  readOnly
+                  className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+                  placeholder={Role}
+                />
+                <div
+
+                  className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
+
+                  {showRole ? <FaCaretUp /> : <FaCaretDown />}
+                </div>
+                <div className={`w-full text-center bg-white font-inter text-[14px] text-[#333333] z-30 absolute ${showRole ? "opacity-100 h-auto visible overflow-auto" : "opacity-0 h-0 invisible overflow-hidden"}`}>
+=======
         <div className="flex flex-col gap-2 mt-4 w-full">
           <label className="font-roboto text-[#000000] text-[16px]">
             Role<span className="text-[#F46B6A]">*</span>
@@ -110,13 +153,14 @@ const page = () => {
               {showRole? <FaCaretUp />:<FaCaretDown />}
             </div>
             <div className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${showRole ? "opacity-100 h-auto visible overflow-auto" : "opacity-0 h-0 invisible overflow-hidden"}`}>
+>>>>>>> d530ae4e7dbd1afe943aecf6a9e8003e2e8e4461
                   {roles.map((item) => (
                     <div key={item} onClick={() => { setRole(item); setShowRole(false); }} className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer">{item}</div>
                   ))}
                 </div>
+              </div>
             </div>
           </div>
-        </div>
 
 
 
@@ -127,14 +171,14 @@ const page = () => {
             </label>
             <div className="relative">
               <input
-               type={showPass ? "text" : "password"}
+                type={showPass ? "text" : "password"}
                 className="w-full bg-white outline-none py-[18px] px-4 text-[#3D3D40] font-roboto text-[16px] placeholder-[#3D3D40] border border-[#CED2E5] rounded "
                 placeholder=""
               />
-              <div 
-               onClick={() => setShowPass(!showPass)}
-              className="w-6 h-6  flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
-                 {showPass ? (
+              <div
+                onClick={() => setShowPass(!showPass)}
+                className="w-6 h-6  flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
+                {showPass ? (
                   <IoEyeOutline className="text-[#6D6E73] w-6 h-6 " />
                 ) : (
                   <FaRegEyeSlash className="text-[#6D6E73] w-6 h-6 " />
@@ -168,8 +212,8 @@ const page = () => {
       </form>
       <div className="mt-8 w-[15%] flex justify-between mx-auto">
         <button
-        onClick={() => setOpen(true)}
-        className="bg-[#5069E5] py-[14px] px-8 text-white font-roboto rounded font-semibold">
+          onClick={() => setOpen(true)}
+          className="bg-[#5069E5] py-[14px] px-8 text-white font-roboto rounded font-semibold">
           Add user
         </button>
 
