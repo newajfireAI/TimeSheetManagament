@@ -1,7 +1,10 @@
+"use client"
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import React from 'react'
 
 export default function SettingsLayout({children}) {
+    const pathname = usePathname()
     const settingTabs = [
         {
             TabName: 'Profile',
@@ -9,35 +12,35 @@ export default function SettingsLayout({children}) {
         },
         {
             TabName: 'Company',
-            tabPath: '/company'
+            tabPath: '/settings/company'
         },
         {
             TabName: 'Role permission',
-            tabPath: '/role'
+            tabPath: '/settings/role'
         },
         {
             TabName: 'Template',
-            tabPath: '/template'
+            tabPath: '/settings/template'
         },
         {
             TabName: 'Subscription',
-            tabPath: '/subscription'
+            tabPath: '/settings/subscription'
         },
         {
             TabName: 'Change Password',
-            tabPath: '/change-password'
+            tabPath: '/settings/change-password'
         }
     ]
     return (
         <div className='text-black'>
-            <div>
+            <div className='flex items-center gap-4'>
                 {
                     settingTabs.map((tab, idx) =>
-                        <Link key={idx} href={tab.tabPath}><p>{tab.TabName}</p></Link>
+                        <Link key={idx} href={tab.tabPath}><p className={`${pathname === tab.tabPath ? 'px-14 py-4 bg-[#D9DFFF] rounded-[4px]' : 'px-12 py-2 bg-[#FFFFFF] rounded-[4px]'} `}>{tab.TabName}</p></Link>
                     )
                 }
             </div>
-            <div>
+            <div className='mt-12'>
                 {children}
             </div>
         </div>
