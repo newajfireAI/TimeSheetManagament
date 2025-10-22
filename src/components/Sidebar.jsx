@@ -45,6 +45,8 @@ function Sidebar() {
         }
     ]
 
+    // pathname.startsWith(link.path + "/")
+
     return (
         <div className={`bg-[#5069E5] w-[100%] h-[100%] px-4 py-6 flex flex-col justify-between`}>
             <div className=' w-full'>
@@ -52,7 +54,7 @@ function Sidebar() {
                     {NavLinks.map((navlink, idx) => (
                         <li
                             key={idx}
-                            className={`w-full text-center text-2xl transition-colors duration-200 ${Pathname === navlink.pathname ? "text-white" : "text-[#0C0C0D]"
+                            className={`w-full text-center text-2xl transition-colors duration-200 ${Pathname === navlink.pathname || Pathname.startsWith(navlink.pathname + "/") ? "text-white" : "text-[#0C0C0D]"
                                 } hover:text-white`}
                         >
                             <Link href={navlink.pathname} className="flex flex-col items-center">
