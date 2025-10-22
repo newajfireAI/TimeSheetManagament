@@ -15,6 +15,7 @@ const page = () => {
 
   const roles= ["User","Vender","Employee" ];
   const gender= ["Male","Female","Others" ];
+  const [open, setOpen] = useState(false);
 
 
 
@@ -163,7 +164,9 @@ const page = () => {
         </div>
       </form>
       <div className="mt-8 w-[15%] flex justify-between mx-auto">
-        <button className="bg-[#5069E5] py-[14px] px-8 text-white font-roboto rounded font-semibold">
+        <button
+        onClick={() => setOpen(true)}
+        className="bg-[#5069E5] py-[14px] px-8 text-white font-roboto rounded font-semibold">
           Add user
         </button>
 
@@ -172,12 +175,12 @@ const page = () => {
         </button>
       </div>
 
-      <div className="w-full bg-green-300 absolute top-1/2 -translate-y-1/2 ">
-        <div className="bg-white w-[150px] h-20 mx-auto">
+      {open && (<div className="w-full  bg-green-300 absolute top-1/2 -translate-y-1/2  ">
+        <div className="bg-white w-[150px] h-20 mx-auto z-30">
           1
         </div>
 
-      </div>
+      </div>)}
 
     </div>
   );
