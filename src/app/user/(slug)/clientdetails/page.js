@@ -1,47 +1,69 @@
 "use client";
+import Radio from "@/components/Radio";
+import Image from "next/image";
+import Link from "next/link";
 import React, { useState } from "react";
-import { FaCaretDown, FaCaretUp, FaPlus } from "react-icons/fa";
+import { FaArrowRight, FaCaretDown, FaCaretUp, FaPlus } from "react-icons/fa";
 import { MdModeEdit } from "react-icons/md";
 
 const page = () => {
+  const roles = ["Client", "Vendor", "Employee"];
+  const [Role, setRole] = useState("Client");
+  const [showRole, setShowRole] = useState(false);
 
-  const roles= ["Client","Vendor","Employee" ];
-  const [Role,setRole] = useState("Client");
-  const [showRole,setShowRole] = useState(false);
+  const clientname = ["Sajid", "Neaz", "Morshed"];
+  const [Client, setClient] = useState("Select Client");
+  const [showClient, setShowClient] = useState(false);
 
-  const clientname= ["Sajid","Neaz","Morshed" ];
-  const [Client,setClient] = useState("Select Client");
-  const [showClient,setShowClient] = useState(false);
+  const vendorname = ["Sajid", "Neaz", "Morshed"];
+  const [Vendor, setVendor] = useState("Select Vendor");
+  const [showVendor, setShowVendor] = useState(false);
 
-   const vendorname= ["Sajid","Neaz","Morshed" ];
-  const [Vendor,setVendor] = useState("Select Vendor");
-  const [showVendor,setShowVendor] = useState(false);
+  const employeename = ["Sajid", "Neaz", "Morshed"];
+  const [Employee, setEmployee] = useState("Select Employee");
+  const [showEmployee, setShowEmployee] = useState(false);
 
-  const period= ["Weekly","Monthly","Yearly" ];
-  const [Period,setPeriod] = useState("Weekly");
-  const [showPeriod,setShowPeriod] = useState(false);
+  const accmanager = ["Sajid", "Neaz", "Morshed"];
+  const [Accmanager, setAccmanager] = useState("Select");
+  const [showAccmanager, setShowAccmanager] = useState(false);
 
-    const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December"
-];
-  const [Month,setMonth] = useState("January");
-  const [showMonth,setShowMonth] = useState(false);
+  const period = ["Weekly", "Monthly", "Yearly"];
+  const [Period, setPeriod] = useState("Weekly");
+  const [showPeriod, setShowPeriod] = useState(false);
+
+  const commission = ["Gross margin", "Gross margin2", "Gross margin3"];
+  const [Commission, setCommission] = useState("Gross margin");
+  const [showCommission, setShowCommission] = useState(false);
+
+   const rate = ["Percentage", "Fixed"];
+  const [Rate, setRate] = useState("Percentage");
+  const [showRate, setShowRate] = useState(false);
+
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const [Month, setMonth] = useState("January");
+  const [showMonth, setShowMonth] = useState(false);
+
+  const [ClientOpen, setClientOpen] = useState(false);
+  const [VendorOpen, setVendorOpen] = useState(false);
+  const [EmployeeOpen, setEmployeeOpen] = useState(false);
 
   return (
     <div>
-      <div className="grid grid-cols-8 grid-rows-3 gap-8">
-        <div className="flex flex-col gap-2 mt-4 col-span-2">
+      <div className="grid grid-cols-8 grid-rows-3 gap-x-8 gap-y-6">
+        <div className="flex flex-col gap-2  col-span-2">
           <label className="font-roboto text-[#000000] text-[16px]">
             Invoice to<span className="text-[#F46B6A]">*</span>
           </label>
@@ -79,23 +101,24 @@ const page = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 mt-4 col-span-2">
+        <div className="flex flex-col gap-2  col-span-2">
           <label className="font-roboto text-[#000000] text-[16px]">
             Client name<span className="text-[#F46B6A]">*</span>
           </label>
-            <div className="relative">
-              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-4 text-[#6D6E73]">
-                              <FaPlus />
-
-                            </div>
-          <div onClick={() => setShowClient(!showClient)}>
-
+          <div className="relative">
+            <div
+              onClick={() => setClientOpen(true)}
+              className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-4 text-[#6D6E73]"
+            >
+              <FaPlus />
+            </div>
+            <div onClick={() => setShowClient(!showClient)}>
               <input
                 readOnly
                 className="w-full bg-white outline-none py-[18px] pl-14 pr-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
                 placeholder={Client}
               />
-              
+
               <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
                 {showClient ? <FaCaretUp /> : <FaCaretDown />}
               </div>
@@ -123,23 +146,23 @@ const page = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 mt-4 col-span-2">
+        <div className="flex flex-col gap-2  col-span-2">
           <label className="font-roboto text-[#000000] text-[16px]">
             Vendor name<span className="text-[#F46B6A]">*</span>
           </label>
-            <div className="relative">
-              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-4 text-[#6D6E73]">
-                              <FaPlus />
-
-                            </div>
-          <div onClick={() => setShowVendor(!showVendor)}>
-
+          <div className="relative">
+            <div 
+            onClick={() => setVendorOpen(true)}
+            className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-4 text-[#6D6E73]">
+              <FaPlus />
+            </div>
+            <div onClick={() => setShowVendor(!showVendor)}>
               <input
                 readOnly
                 className="w-full bg-white outline-none py-[18px] pl-14 pr-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
                 placeholder={Vendor}
               />
-              
+
               <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
                 {showVendor ? <FaCaretUp /> : <FaCaretDown />}
               </div>
@@ -167,21 +190,18 @@ const page = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 mt-4 col-span-2">
+        <div className="flex flex-col gap-2  col-span-2">
           <label className="font-roboto text-[#000000] text-[16px]">
             Client rate<span className="text-[#F46B6A]">*</span>
           </label>
-          
+
           <input
-                
-                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
-                placeholder="Enter Client rate"
-              />
-   
-          
+            className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+            placeholder="Enter Client rate"
+          />
         </div>
 
-        <div className="flex flex-col gap-2 mt-4 col-span-2">
+        <div className="flex flex-col gap-2  col-span-2">
           <label className="font-roboto text-[#000000] text-[16px]">
             Timesheet period<span className="text-[#F46B6A]">*</span>
           </label>
@@ -219,63 +239,51 @@ const page = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 mt-4 col-span-3">
+        <div className="flex flex-col gap-2  col-span-3">
           <label className="font-roboto text-[#000000] text-[16px]">
             Start date<span className="text-[#F46B6A]">*</span>
           </label>
-          
+
           <input
-                
-                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
-                placeholder="dd/mm/yy"
-              />
-   
-          
+            className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+            placeholder="dd/mm/yy"
+          />
         </div>
 
-        <div className="flex flex-col gap-2 mt-4 col-span-3">
+        <div className="flex flex-col gap-2  col-span-3">
           <label className="font-roboto text-[#000000] text-[16px]">
             End date<span className="text-[#F46B6A]">*</span>
           </label>
-          
+
           <input
-                
-                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
-                placeholder="dd/mm/yy"
-              />
-   
-          
+            className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+            placeholder="dd/mm/yy"
+          />
         </div>
 
-        <div className="flex flex-col gap-2 mt-4 col-span-2">
+        <div className="flex flex-col gap-2  col-span-2">
           <label className="font-roboto text-[#000000] text-[16px]">
             Other<span className="text-[#F46B6A]">*</span>
           </label>
-          
+
           <input
-                
-                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
-                placeholder="Enter c2c/other"
-              />
-   
-          
+            className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+            placeholder="Enter c2c/other"
+          />
         </div>
 
-        <div className="flex flex-col gap-2 mt-4 col-span-3">
+        <div className="flex flex-col gap-2  col-span-3">
           <label className="font-roboto text-[#000000] text-[16px]">
             Other rate type<span className="text-[#F46B6A]">*</span>
           </label>
-          
+
           <input
-                
-                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
-                placeholder="Percentage"
-              />
-   
-          
+            className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+            placeholder="Percentage"
+          />
         </div>
 
-        <div className="flex flex-col gap-2 mt-4 col-span-3">
+        <div className="flex flex-col gap-2  col-span-3">
           <label className="font-roboto text-[#000000] text-[16px]">
             Recursive<span className="text-[#F46B6A]">*</span>
           </label>
@@ -314,9 +322,552 @@ const page = () => {
         </div>
       </div>
 
-      <div>
-        
+      <div className="mt-16">
+        <Radio />
+
+        <div className="grid grid-cols-8 grid-rows-2 gap-x-8 gap-y-6 mt-8">
+          <div className="flex flex-col gap-2  col-span-2">
+            <label className="font-roboto text-[#000000] text-[16px]">
+              W2<span className="text-[#F46B6A]">*</span>
+            </label>
+
+            <input
+              className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+              placeholder="Enter W2"
+            />
+          </div>
+
+          <div className="flex flex-col gap-2  col-span-3">
+            <label className="font-roboto text-[#000000] text-[16px]">
+              Pay tax<span className="text-[#F46B6A]">*</span>
+            </label>
+
+            <input
+              className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+              placeholder="Percentage"
+            />
+          </div>
+          <div className="flex flex-col gap-2  col-span-3">
+            <label className="font-roboto text-[#000000] text-[16px]">
+              Consultant rate<span className="text-[#F46B6A]">*</span>
+            </label>
+
+            <input
+              className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+              placeholder="Enter consultant rater"
+            />
+          </div>
+
+          <div className="flex flex-col gap-2  col-span-2">
+            <label className="font-roboto text-[#000000] text-[16px]">
+              Employee name<span className="text-[#F46B6A]">*</span>
+            </label>
+            <div className="relative">
+              <div 
+              onClick={() => setEmployeeOpen(true)}
+              className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-4 text-[#6D6E73]">
+                <FaPlus />
+              </div>
+              <div onClick={() => setShowEmployee(!showEmployee)}>
+                <input
+                  readOnly
+                  className="w-full bg-white outline-none py-[18px] pl-14 pr-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+                  placeholder={Employee}
+                />
+
+                <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
+                  {showEmployee ? <FaCaretUp /> : <FaCaretDown />}
+                </div>
+                <div
+                  className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
+                    showEmployee
+                      ? "opacity-100 h-auto visible overflow-auto"
+                      : "opacity-0 h-0 invisible overflow-hidden"
+                  }`}
+                >
+                  {employeename.map((item) => (
+                    <div
+                      key={item}
+                      onClick={() => {
+                        setEmployee(item);
+                        setShowEmployee(false);
+                      }}
+                      className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
+                    >
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2  col-span-3">
+            <label className="font-roboto text-[#000000] text-[16px]">
+              Employee Phone<span className="text-[#F46B6A]">*</span>
+            </label>
+
+            <input
+              className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+              placeholder="Enter"
+            />
+          </div>
+          <div className="flex flex-col gap-2  col-span-3">
+            <label className="font-roboto text-[#000000] text-[16px]">
+              Zip code<span className="text-[#F46B6A]">*</span>
+            </label>
+
+            <input
+              className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+              placeholder="Enter Zip code"
+            />
+          </div>
+        </div>
       </div>
+
+      <div className="grid grid-cols-5 grid-rows-3 gap-x-8 gap-y-6 mt-16">
+        <div className="flex flex-col gap-2  ">
+          <label className="font-roboto text-[#000000] text-[16px]">
+            Account manager<span className="text-[#F46B6A]">*</span>
+          </label>
+          <div className="relative" onClick={() => setShowAccmanager(!showAccmanager)}>
+            <div>
+              <input
+                readOnly
+                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+                placeholder={Accmanager}
+              />
+              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
+                {showAccmanager ? <FaCaretUp /> : <FaCaretDown />}
+              </div>
+              <div
+                className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
+                  showAccmanager
+                    ? "opacity-100 h-auto visible overflow-auto"
+                    : "opacity-0 h-0 invisible overflow-hidden"
+                }`}
+              >
+                {accmanager.map((item) => (
+                  <div
+                    key={item}
+                    onClick={() => {
+                      setAccmanager(item);
+                      setShowAccmanager(false);
+                    }}
+                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2  ">
+          <label className="font-roboto text-[#000000] text-[16px]">
+           Commission<span className="text-[#F46B6A]">*</span>
+          </label>
+
+          <input
+            className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+            placeholder="Enter Commission"
+          />
+        </div>
+        <div className="flex flex-col gap-2  ">
+          <label className="font-roboto text-[#000000] text-[16px]">
+            Commission on<span className="text-[#F46B6A]">*</span>
+          </label>
+          <div className="relative" onClick={() => setShowCommission(!showCommission)}>
+            <div>
+              <input
+                readOnly
+                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+                placeholder={Commission}
+              />
+              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
+                {showCommission ? <FaCaretUp /> : <FaCaretDown />}
+              </div>
+              <div
+                className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
+                  showCommission
+                    ? "opacity-100 h-auto visible overflow-auto"
+                    : "opacity-0 h-0 invisible overflow-hidden"
+                }`}
+              >
+                {commission.map((item) => (
+                  <div
+                    key={item}
+                    onClick={() => {
+                      setCommission(item);
+                      setShowCommission(false);
+                    }}
+                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2  ">
+          <label className="font-roboto text-[#000000] text-[16px]">
+            Rate type<span className="text-[#F46B6A]">*</span>
+          </label>
+          <div className="relative" onClick={() => setShowRate(!showRate)}>
+            <div>
+              <input
+                readOnly
+                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+                placeholder={Rate}
+              />
+              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
+                {showRate ? <FaCaretUp /> : <FaCaretDown />}
+              </div>
+              <div
+                className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
+                  showRate
+                    ? "opacity-100 h-auto visible overflow-auto"
+                    : "opacity-0 h-0 invisible overflow-hidden"
+                }`}
+              >
+                {rate.map((item) => (
+                  <div
+                    key={item}
+                    onClick={() => {
+                      setRate(item);
+                      setShowRate(false);
+                    }}
+                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+         <div className="flex flex-col gap-2  ">
+          <label className="font-roboto text-[#000000] text-[16px]">
+            Account manager<span className="text-[#F46B6A]">*</span>
+          </label>
+          <div className="relative" onClick={() => setShowRole(!showRole)}>
+            <div>
+              <input
+                readOnly
+                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+                placeholder={Role}
+              />
+              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
+                {showRole ? <FaCaretUp /> : <FaCaretDown />}
+              </div>
+              <div
+                className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
+                  showRole
+                    ? "opacity-100 h-auto visible overflow-auto"
+                    : "opacity-0 h-0 invisible overflow-hidden"
+                }`}
+              >
+                {roles.map((item) => (
+                  <div
+                    key={item}
+                    onClick={() => {
+                      setRole(item);
+                      setShowRole(false);
+                    }}
+                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+       <div className=" flex flex-row justify-center gap-4 pb-12">
+               <button
+       
+        className="bg-[#5069E5] py-[14px] px-8 text-white font-roboto rounded font-semibold">
+          Update client details
+        </button>
+
+        <button 
+        
+        className="bg-[#FFF7F7] py-[14px] px-8 text-[#F46B6A] font-roboto rounded font-semibold">
+          Close
+        </button>
+            </div>
+
+{/* pop up */}
+      {ClientOpen && (
+        <div className=" w-full  absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-transparent py-30  ">
+          <div className=" bg-[#FFFFFF] w-[800px] mx-auto  z-30 shadow-2xl rounded ">
+            <div className=" bg-[#F0F0F2] py-4 pl-12  border-b border-[#CED2E5]">
+              <p className="font-roboto text-[20px] text-black">
+                Add New Client
+              </p>
+            </div>
+
+            
+              <div className="bg-[#FFFFFF] p-12">
+
+
+                <div className="grid grid-cols-3 grid-rows-2 gap-y-6 gap-x-4 ">
+              <div className="flex flex-col gap-2  ">
+                <label className="font-roboto text-[#000000] text-[16px]">
+                  Name<span className="text-[#F46B6A]">*</span>
+                </label>
+
+                <input
+                  className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+                  placeholder="Client Name"
+                />
+              </div>
+
+              <div className="flex flex-col gap-2  ">
+                <label className="font-roboto text-[#000000] text-[16px]">
+                  Phone<span className="text-[#F46B6A]">*</span>
+                </label>
+
+                <input
+                  className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+                  placeholder="Client Phone"
+                />
+              </div>
+
+              <div className="flex flex-col gap-2  ">
+                <label className="font-roboto text-[#000000] text-[16px]">
+                  Zip Code<span className="text-[#F46B6A]">*</span>
+                </label>
+
+                <input
+                  className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+                  placeholder="Enter Zip Code"
+                />
+              </div>
+
+              <div className="flex flex-col gap-2  ">
+                <label className="font-roboto text-[#000000] text-[16px]">
+                  Address
+                </label>
+
+                <input
+                  className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px]  border border-[#CED2E5] rounded "
+                  
+                />
+              </div>
+
+              <div className="flex flex-col gap-2  ">
+                <label className="font-roboto text-[#000000] text-[16px]">
+                  Remark</label>
+
+                <input
+                  className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px]  border border-[#CED2E5] rounded "
+                  
+                />
+              </div>
+            </div>
+
+          
+            <div className="mt-12 flex flex-row gap-4">
+               <button
+       
+        className="bg-[#5069E5] py-[14px] px-8 text-white font-roboto rounded font-semibold">
+          Save
+        </button>
+
+        <button 
+         onClick={() => setClientOpen(false)}
+        className="bg-[#FFF7F7] py-[14px] px-8 text-[#F46B6A] font-roboto rounded font-semibold">
+          Close
+        </button>
+            </div>
+              </div>
+          </div>
+        </div>
+      )}
+
+      {VendorOpen && (
+        <div className=" w-full  absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-transparent py-30  ">
+          <div className=" bg-[#FFFFFF] w-[800px] mx-auto  z-30 shadow-2xl rounded ">
+            <div className=" bg-[#F0F0F2] py-4 pl-12  border-b border-[#CED2E5]">
+              <p className="font-roboto text-[20px] text-black">
+                Add New Vendor
+              </p>
+            </div>
+
+            
+              <div className="bg-[#FFFFFF] p-12">
+
+
+                <div className="grid grid-cols-3 grid-rows-2 gap-y-6 gap-x-4 ">
+              <div className="flex flex-col gap-2  ">
+                <label className="font-roboto text-[#000000] text-[16px]">
+                  Name<span className="text-[#F46B6A]">*</span>
+                </label>
+
+                <input
+                  className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+                  placeholder="Vendor Name"
+                />
+              </div>
+
+              <div className="flex flex-col gap-2  ">
+                <label className="font-roboto text-[#000000] text-[16px]">
+                  Phone<span className="text-[#F46B6A]">*</span>
+                </label>
+
+                <input
+                  className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+                  placeholder="Vendor Phone"
+                />
+              </div>
+
+              <div className="flex flex-col gap-2  ">
+                <label className="font-roboto text-[#000000] text-[16px]">
+                  Zip Code<span className="text-[#F46B6A]">*</span>
+                </label>
+
+                <input
+                  className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+                  placeholder="Enter Zip Code"
+                />
+              </div>
+
+              <div className="flex flex-col gap-2  ">
+                <label className="font-roboto text-[#000000] text-[16px]">
+                  Address
+                </label>
+
+                <input
+                  className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px]  border border-[#CED2E5] rounded "
+                  
+                />
+              </div>
+
+              <div className="flex flex-col gap-2  ">
+                <label className="font-roboto text-[#000000] text-[16px]">
+                  Remark</label>
+
+                <input
+                  className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px]  border border-[#CED2E5] rounded "
+                  
+                />
+              </div>
+            </div>
+
+          
+            <div className="mt-12 flex flex-row gap-4">
+               <button
+       
+        className="bg-[#5069E5] py-[14px] px-8 text-white font-roboto rounded font-semibold">
+          Save
+        </button>
+
+        <button 
+         onClick={() => setVendorOpen(false)}
+        className="bg-[#FFF7F7] py-[14px] px-8 text-[#F46B6A] font-roboto rounded font-semibold">
+          Close
+        </button>
+            </div>
+              </div>
+          </div>
+        </div>
+      )}
+
+
+      {EmployeeOpen && (
+        <div className=" w-full  absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-transparent py-30  ">
+          <div className=" bg-[#FFFFFF] w-[800px] mx-auto  z-30 shadow-2xl rounded ">
+            <div className=" bg-[#F0F0F2] py-4 pl-12  border-b border-[#CED2E5]">
+              <p className="font-roboto text-[20px] text-black">
+                Add New Employee
+              </p>
+            </div>
+
+            
+              <div className="bg-[#FFFFFF] p-12">
+
+
+                <div className="grid grid-cols-3 grid-rows-2 gap-y-6 gap-x-4 ">
+              <div className="flex flex-col gap-2  ">
+                <label className="font-roboto text-[#000000] text-[16px]">
+                  Name<span className="text-[#F46B6A]">*</span>
+                </label>
+
+                <input
+                  className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+                  placeholder="Employee Name"
+                />
+              </div>
+
+              <div className="flex flex-col gap-2  ">
+                <label className="font-roboto text-[#000000] text-[16px]">
+                  Phone<span className="text-[#F46B6A]">*</span>
+                </label>
+
+                <input
+                  className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+                  placeholder="Employee Phone"
+                />
+              </div>
+
+              <div className="flex flex-col gap-2  ">
+                <label className="font-roboto text-[#000000] text-[16px]">
+                  Zip Code<span className="text-[#F46B6A]">*</span>
+                </label>
+
+                <input
+                  className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+                  placeholder="Enter Zip Code"
+                />
+              </div>
+
+              <div className="flex flex-col gap-2  ">
+                <label className="font-roboto text-[#000000] text-[16px]">
+                  Address
+                </label>
+
+                <input
+                  className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px]  border border-[#CED2E5] rounded "
+                  
+                />
+              </div>
+
+              <div className="flex flex-col gap-2  ">
+                <label className="font-roboto text-[#000000] text-[16px]">
+                  Remark</label>
+
+                <input
+                  className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px]  border border-[#CED2E5] rounded "
+                  
+                />
+              </div>
+            </div>
+
+          
+            <div className="mt-12 flex flex-row gap-4">
+               <button
+       
+        className="bg-[#5069E5] py-[14px] px-8 text-white font-roboto rounded font-semibold">
+          Save
+        </button>
+
+        <button 
+         onClick={() => setEmployeeOpen(false)}
+        className="bg-[#FFF7F7] py-[14px] px-8 text-[#F46B6A] font-roboto rounded font-semibold">
+          Close
+        </button>
+            </div>
+              </div>
+          </div>
+        </div>
+      )}
+      {/* pop up */}
     </div>
   );
 };
