@@ -2,18 +2,21 @@
 import Container from "@/components/container";
 import React, { useState } from "react";
 import { MdModeEdit } from "react-icons/md";
-import { FaCaretDown, FaCaretUp, FaRegEyeSlash } from "react-icons/fa";
+import { FaArrowRight, FaCaretDown, FaCaretUp, FaRegEyeSlash } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
+import Image from "next/image";
+import Link from "next/link";
+// import userIcon from "/assets/userIcon.png"
 
 const page = () => {
   const [showPass, setShowPass] = useState(false);
-  const [showNewPass, setShowNewPass] = useState(false);
+  // const [showNewPass, setShowNewPass] = useState(false);
   const [Role,setRole] = useState("User");
    const [showRole,setShowRole] = useState(false);
    const [Gender,setGender] = useState("Male");
    const [showGender,setShowGender] = useState(false);
 
-  const roles= ["User","Vender","Employee" ];
+  const roles= ["User","Vendor","Employee" ];
   const gender= ["Male","Female","Others" ];
   const [open, setOpen] = useState(false);
 
@@ -73,7 +76,7 @@ const page = () => {
               <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
                 {showGender? <FaCaretUp />:<FaCaretDown />}
             </div>
-            <div className={`w-full text-center bg-white font-inter text-[14px] text-[#333333] z-30 absolute ${showGender ? "opacity-100 h-auto visible overflow-auto" : "opacity-0 h-0 invisible overflow-hidden"}`}>
+            <div className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${showGender ? "opacity-100 h-auto visible overflow-auto" : "opacity-0 h-0 invisible overflow-hidden"}`}>
                   {gender.map((item) => (
                     <div key={item} onClick={() => { setGender(item); setShowGender(false); }} className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer">{item}</div>
                   ))}
@@ -106,7 +109,7 @@ const page = () => {
               
               {showRole? <FaCaretUp />:<FaCaretDown />}
             </div>
-            <div className={`w-full text-center bg-white font-inter text-[14px] text-[#333333] z-30 absolute ${showRole ? "opacity-100 h-auto visible overflow-auto" : "opacity-0 h-0 invisible overflow-hidden"}`}>
+            <div className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${showRole ? "opacity-100 h-auto visible overflow-auto" : "opacity-0 h-0 invisible overflow-hidden"}`}>
                   {roles.map((item) => (
                     <div key={item} onClick={() => { setRole(item); setShowRole(false); }} className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer">{item}</div>
                   ))}
@@ -175,9 +178,32 @@ const page = () => {
         </button>
       </div>
 
-      {open && (<div className="w-full  bg-green-300 absolute top-1/2 -translate-y-1/2  ">
-        <div className="bg-white w-[150px] h-20 mx-auto z-30">
-          1
+      {open && (<div className=" w-full  absolute top-1/2 -translate-y-1/2 bg-transparent py-30   ">
+        <div className="bg-[url('/assets/popup.png')] py-[87px] px-[67px] w-[400px] mx-auto  bg-cover bg-center bg-no-repeat   z-30">
+          <div className="w-[266px]">
+            <div className="flex flex-col justify-center items-center gap-2">
+              <Image src="/assets/userIcon.png" alt="User Icon" width={58} height={58}/>
+
+              <p className="font-roboto text-[#0C0C0D] font-medium text-[20px] text-center">
+                User has been registered successfully
+              </p>
+              </div>
+
+
+
+
+            <div className="flex flex-col gap-3 items-center mt-6 ">
+
+            <Link href="/user/clientdetails">
+            <button className="flex items-center gap-2 py-2.5 px-4 bg-[#5069E5] text-[#FFFFFF] font-roboto rounded  font-medium">Assign client details
+              <FaArrowRight />
+            </button>
+            </Link>
+          <button
+          onClick={() => setOpen(false)}
+           className="py-2 px-4 bg-[#FFF7F7] text-[#F46B6A] font-roboto rounded font-medium ">Close</button>
+            </div>
+            </div>      
         </div>
 
       </div>)}
