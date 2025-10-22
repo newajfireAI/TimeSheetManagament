@@ -7,7 +7,7 @@ function Navbar() {
   const pathName = usePathname()
 
   return (
-    <div className='bg-white shadow w-full h-full text-black py-6 px-12 gap-12 flex justify-center items-center'>
+    <div className='bg-white shadow w-full h-full text-black py-6 px-12 gap-12 flex justify-center items-center z-30'>
         <div className='w-[48px] h-[48px]'>
           <Image className='w-full h-full scale-150' src={'/assets/logo.png'} alt={'Company Logo'} width={100} height={100} />
         </div>
