@@ -55,9 +55,23 @@ const page = () => {
   const [Rate, setRate] = useState("Percentage");
   const [showRate, setShowRate] = useState(false);
 
+  const rate2 = ["Percentage", "Fixed"];
+  const [Rate2, setRate2] = useState("Percentage");
+  const [showRate2, setShowRate2] = useState(false);
+
+  const rate3 = ["Percentage", "Fixed"];
+  const [Rate3, setRate3] = useState("Percentage");
+  const [showRate3, setShowRate3] = useState(false);
+
   
   const [Recursive, setRecursive] = useState("Select month");
   const [showRecursive, setShowRecursive] = useState(false);
+
+  const [Recursive2, setRecursive2] = useState("Select month");
+  const [showRecursive2, setShowRecursive2] = useState(false);
+
+  const [Recursive3, setRecursive3] = useState("Select month");
+  const [showRecursive3, setShowRecursive3] = useState(false);
 
   const months = [
     "January",
@@ -81,6 +95,8 @@ const page = () => {
   const [EmployeeOpen, setEmployeeOpen] = useState(false);
 
   const [selected, setSelected]= useState(null);
+  const [selected2, setSelected2]= useState(null);
+  const [selected3, setSelected3]= useState(null);
 
   return (
     <div>
@@ -730,29 +746,29 @@ const page = () => {
           <label className="font-roboto text-[#000000] text-[16px]">
             Rate type<span className="text-[#F46B6A]">*</span>
           </label>
-          <div className="relative" onClick={() => setShowRate(!showRate)}>
+          <div className="relative" onClick={() => setShowRate2(!showRate2)}>
             <div>
               <input
                 readOnly
                 className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
-                placeholder={Rate}
+                placeholder={Rate2}
               />
               <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
-                {showRate ? <FaCaretUp /> : <FaCaretDown />}
+                {showRate2 ? <FaCaretUp /> : <FaCaretDown />}
               </div>
               <div
                 className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
-                  showRate
+                  showRate2
                     ? "opacity-100 h-auto visible overflow-auto"
                     : "opacity-0 h-0 invisible overflow-hidden"
                 }`}
               >
-                {rate.map((item) => (
+                {rate2.map((item) => (
                   <div
                     key={item}
                     onClick={() => {
-                      setRate(item);
-                      setShowRate(false);
+                      setRate2(item);
+                      setShowRate2(false);
                     }}
                     className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
                   >
@@ -767,48 +783,48 @@ const page = () => {
 
           <label
         className={`flex items-center gap-2  cursor-pointer transition 
-        ${selected  ? "" : ""}`}
+        ${selected2  ? "" : ""}`}
       >
         <input
           type="radio"
           name="plan"
           value="Recursive"
-          checked={selected}
-          onClick={() => setSelected(!selected)}
+          checked={selected2}
+          onClick={() => setSelected2(!selected2)}
           className="hidden"
         />
         <div
           className={`w-5 h-5 rounded-full border-2 flex items-center justify-center 
-          ${selected  ? "border-[#5069E5]/30 " : "border-[#DFE0E5] "}`}
+          ${selected2  ? "border-[#5069E5]/30 " : "border-[#DFE0E5] "}`}
         >
-          <div className={`w-3 h-3 bg-[#5069E5] rounded-full ${selected? "bg-[#5069E5] " : "bg-[#DFE0E5] "}`}></div>
+          <div className={`w-3 h-3 bg-[#5069E5] rounded-full ${selected2? "bg-[#5069E5] " : "bg-[#DFE0E5] "}`}></div>
         </div>
         <p className={`font-roboto text-[#000000] text-[16px]`}>Recursive</p>
       </label>
      
     
 
-          <div className="relative" onClick={() => !selected && setShowRecursive(!showRecursive)}>
+          <div className="relative" onClick={() => !selected2 && setShowRecursive2(!showRecursive2)}>
             <div>
               <input
                 readOnly
-                disabled={selected}
+                disabled={selected2}
                  className={`w-full outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border  rounded
-            ${selected ? "border-[#CED2E5] bg-[#D9DFFF] cursor-not-allowed" : "border-[#CED2E5] bg-white  "}`}
+            ${selected2 ? "border-[#CED2E5] bg-[#D9DFFF] cursor-not-allowed" : "border-[#CED2E5] bg-white  "}`}
           placeholder={
-            selected 
+            selected2 
               ? "On all month" 
-              : Recursive 
-                ? Recursive 
+              : Recursive2 
+                ? Recursive2 
                 : "Select Month"
           }
               />
               <div className={`w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73] ${selected? "hidden" : ""}`}>
-                {showRecursive ? <FaCaretUp /> : <FaCaretDown />}
+                {showRecursive2 ? <FaCaretUp /> : <FaCaretDown />}
               </div>
               <div
                 className={`w-full overflow-y-scroll hide-scrollbar text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
-                  showRecursive
+                  showRecursive2
                     ? "opacity-100 h-[250px] visible overflow-auto"
                     : "opacity-0 h-0 invisible overflow-hidden"
                 }`}
@@ -817,8 +833,8 @@ const page = () => {
                   <div
                     key={item}
                     onClick={() => {
-                      setRecursive(item);
-                      setShowRecursive(false);
+                      setRecursive2(item);
+                      setShowRecursive2(false);
                     }}
                     className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
                   >
@@ -920,29 +936,29 @@ const page = () => {
           <label className="font-roboto text-[#000000] text-[16px]">
             Rate type<span className="text-[#F46B6A]">*</span>
           </label>
-          <div className="relative" onClick={() => setShowRate(!showRate)}>
+          <div className="relative" onClick={() => setShowRate3(!showRate3)}>
             <div>
               <input
                 readOnly
                 className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
-                placeholder={Rate}
+                placeholder={Rate3}
               />
               <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
-                {showRate ? <FaCaretUp /> : <FaCaretDown />}
+                {showRate3 ? <FaCaretUp /> : <FaCaretDown />}
               </div>
               <div
                 className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
-                  showRate
+                  showRate3
                     ? "opacity-100 h-auto visible overflow-auto"
                     : "opacity-0 h-0 invisible overflow-hidden"
                 }`}
               >
-                {rate.map((item) => (
+                {rate3.map((item) => (
                   <div
                     key={item}
                     onClick={() => {
-                      setRate(item);
-                      setShowRate(false);
+                      setRate3(item);
+                      setShowRate3(false);
                     }}
                     className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
                   >
@@ -957,48 +973,48 @@ const page = () => {
 
           <label
         className={`flex items-center gap-2  cursor-pointer transition 
-        ${selected  ? "" : ""}`}
+        ${selected3  ? "" : ""}`}
       >
         <input
           type="radio"
           name="plan"
           value="Recursive"
-          checked={selected}
-          onClick={() => setSelected(!selected)}
+          checked={selected3}
+          onClick={() => setSelected3(!selected3)}
           className="hidden"
         />
         <div
           className={`w-5 h-5 rounded-full border-2 flex items-center justify-center 
-          ${selected  ? "border-[#5069E5]/30 " : "border-[#DFE0E5] "}`}
+          ${selected3  ? "border-[#5069E5]/30 " : "border-[#DFE0E5] "}`}
         >
-          <div className={`w-3 h-3 bg-[#5069E5] rounded-full ${selected? "bg-[#5069E5] " : "bg-[#DFE0E5] "}`}></div>
+          <div className={`w-3 h-3 bg-[#5069E5] rounded-full ${selected3? "bg-[#5069E5] " : "bg-[#DFE0E5] "}`}></div>
         </div>
         <p className={`font-roboto text-[#000000] text-[16px]`}>Recursive</p>
       </label>
      
     
 
-          <div className="relative" onClick={() => !selected && setShowRecursive(!showRecursive)}>
+          <div className="relative" onClick={() => !selected3 && setShowRecursive3(!showRecursive3)}>
             <div>
               <input
                 readOnly
-                disabled={selected}
+                disabled={selected3}
                  className={`w-full outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border  rounded
-            ${selected ? "border-[#CED2E5] bg-[#D9DFFF] cursor-not-allowed" : "border-[#CED2E5] bg-white  "}`}
+            ${selected3 ? "border-[#CED2E5] bg-[#D9DFFF] cursor-not-allowed" : "border-[#CED2E5] bg-white  "}`}
           placeholder={
-            selected 
+            selected3 
               ? "On all month" 
-              : Recursive 
-                ? Recursive 
+              : Recursive3 
+                ? Recursive3 
                 : "Select Month"
           }
               />
-              <div className={`w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73] ${selected? "hidden" : ""}`}>
-                {showRecursive ? <FaCaretUp /> : <FaCaretDown />}
+              <div className={`w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73] ${selected3? "hidden" : ""}`}>
+                {showRecursive3 ? <FaCaretUp /> : <FaCaretDown />}
               </div>
               <div
                 className={`w-full overflow-y-scroll hide-scrollbar text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
-                  showRecursive
+                  showRecursive3
                     ? "opacity-100 h-[250px] visible overflow-auto"
                     : "opacity-0 h-0 invisible overflow-hidden"
                 }`}
@@ -1007,8 +1023,8 @@ const page = () => {
                   <div
                     key={item}
                     onClick={() => {
-                      setRecursive(item);
-                      setShowRecursive(false);
+                      setRecursive3(item);
+                      setShowRecursive3(false);
                     }}
                     className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
                   >
