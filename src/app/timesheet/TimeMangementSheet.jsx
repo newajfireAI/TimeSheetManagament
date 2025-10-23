@@ -1,16 +1,28 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
+import { FaRegEye } from "react-icons/fa";
+import { MdOutlineArrowDropDown, MdArrowDropUp } from "react-icons/md";
+
 
 function TimeMangementSheet() {
     const [Active, setActive] = useState("All")
-    const [baseOnTitle, setBaseOnTitle] = useState([])
-    const [currentPage, setCurrentPage] = useState(1);
 
+    const [status, setStatus] = useState("")
+    const [ChangeStatus, setChangeStatus] = useState(false)
+
+    const [baseOnTitle, setBaseOnTitle] = useState([])
+    const [currentPage, setCurrentPage] = useState(1)
     const [viewActivity, setViewActivity] = useState(false)
     const clieckref = useRef(null)
 
     const FilterTab = [
         { title: "All" },
+        { title: "Approved" },
+        { title: "Pending" },
+        { title: "Rejected" }
+    ]
+
+    const Status = [
         { title: "Approved" },
         { title: "Pending" },
         { title: "Rejected" }
@@ -45,14 +57,16 @@ function TimeMangementSheet() {
         if (title === "All") {
             setBaseOnTitle(data)
         } else {
-            const checkTilte = data.filter(data => data.Role === title)
+            const checkTilte = data.filter(data => data.Status === title)
             setBaseOnTitle(checkTilte);
         }
     }
 
     useEffect(() => {
         setBaseOnTitle(data)
+        // data.map((item)=> setStatus(item.Status))
     }, [])
+
 
 
     const itemsPerPage = 10;
@@ -63,7 +77,7 @@ function TimeMangementSheet() {
 
     const hendleClickOutSite = (e) => {
         if (clieckref.current.contains(e.target) === false) {
-            setUploadImage(false)
+            setViewActivity(false)
         }
     }
 
@@ -96,8 +110,36 @@ function TimeMangementSheet() {
                                         <td className='border-b-3 px-4 border-r-3 py-[22px] border-[#F0F0F2] rounded-xl p-2 text-left'>{item.Client}</td>
                                         <td className='border-b-3 px-4 border-r-3 py-[22px] border-[#F0F0F2] rounded-xl p-2 text-left'>{item.Period}</td>
                                         <td className='border-b-3 px-4 border-r-3 py-[22px] border-[#F0F0F2] rounded-xl p-2 text-left'>{item.Upload_Date}</td>
-                                        <td className='border-b-3 px-4 border-r-3 py-[22px] border-[#F0F0F2] rounded-xl p-2 text-left'>{item.Status}</td>
-                                        <td onClick={()=> setViewActivity(true)} className='border-b-3 px-4 border-r-3 py-[22px] border-[#F0F0F2] rounded-xl p-2 text-center'>{item.Action}</td>
+
+                                        <td className='border-b-3 px-4 border-r-3 py-[22px] border-[#F0F0F2] rounded-xl p-2 text-left relative'>
+                                            <span
+                                                onClick={() => setChangeStatus(ChangeStatus === idx ? null : idx)}
+                                                className={`${item.Status === "Approved" && "text-[#1B654A] bg-[#F2FFFA]"} 
+      ${item.Status === "Pending" && "text-[#E5D416] border-dashed border-[#E5D416] border-2 bg-[#FFFEF7]"} 
+      ${item.Status === "Rejected" && "text-[#F46B6A] bg-[#FFF7F7]"} 
+      px-6 py-1 rounded-full mx-2 flex items-center justify-between cursor-pointer`}>
+                                                {status && ChangeStatus === idx ? status : item.Status}
+                                                <MdOutlineArrowDropDown className='text-2xl' />
+                                            </span>
+
+                                            {ChangeStatus === idx && (
+                                                <div className='absolute top-13 right-12 z-10 bg-white p-4 shadow-md rounded-md'>
+                                                    {Status.map((s, i) => (
+                                                        <div
+                                                            key={i}
+                                                            onClick={() => {
+                                                                setStatus(s.title);
+                                                                setChangeStatus(null);
+                                                            }}
+                                                            className="py-2 px-3 hover:bg-[#5069E5] hover:text-white cursor-pointer rounded">
+                                                            {s.title}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </td>
+
+                                        <td onClick={() => setViewActivity(true)} className='border-b-3 px-4 border-r-3 py-[22px] border-[#F0F0F2] text-[#5069E5] rounded-xl p-2 text-center'> <span className='flex items-center gap-2'><FaRegEye className='text-[#D9DFFF]' />{item.Action}</span></td>
                                     </tr>
                                 )
                             }
@@ -155,6 +197,25 @@ function TimeMangementSheet() {
                     </div>
                 </div>
             </div>
+
+
+
+
+
+            {/* <div className="flex flex-col gap-2 mt-4  w-full">
+
+                <div className="relative" onClick={() => setShowGender(!showGender)}>
+                    <input readOnly className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded " placeholder={Gender} />
+                    <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
+                        {showGender ? <FaCaretUp /> : <FaCaretDown />}
+                    </div>
+                    <div className={``}>
+                        {gender.map((item) => (
+                            <div key={item} onClick={() => { setGender(item); setShowGender(false); }} className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer">{item}</div>
+                        ))}
+                    </div>
+                </div>
+            </div> */}
         </>
     )
 }
