@@ -39,6 +39,10 @@ const page = () => {
   const [Rate, setRate] = useState("Percentage");
   const [showRate, setShowRate] = useState(false);
 
+  
+  const [Recursive, setRecursive] = useState("Select month");
+  const [showRecursive, setShowRecursive] = useState(false);
+
   const months = [
     "January",
     "February",
@@ -59,6 +63,8 @@ const page = () => {
   const [ClientOpen, setClientOpen] = useState(false);
   const [VendorOpen, setVendorOpen] = useState(false);
   const [EmployeeOpen, setEmployeeOpen] = useState(false);
+
+  const [selected, setSelected]= useState(null);
 
   return (
     <div>
@@ -550,32 +556,61 @@ const page = () => {
           </div>
         </div>
          <div className="flex flex-col gap-2  ">
-          <label className="font-roboto text-[#000000] text-[16px]">
-            Account manager<span className="text-[#F46B6A]">*</span>
-          </label>
-          <div className="relative" onClick={() => setShowRole(!showRole)}>
+
+          <label
+        className={`flex items-center gap-2  cursor-pointer transition 
+        ${selected  ? "" : ""}`}
+      >
+        <input
+          type="radio"
+          name="plan"
+          value="Recursive"
+          checked={selected}
+          onClick={() => setSelected(!selected)}
+          className="hidden"
+        />
+        <div
+          className={`w-5 h-5 rounded-full border-2 flex items-center justify-center 
+          ${selected  ? "border-[#5069E5]/30 " : "border-[#DFE0E5] "}`}
+        >
+          <div className={`w-3 h-3 bg-[#5069E5] rounded-full ${selected? "bg-[#5069E5] " : "bg-[#DFE0E5] "}`}></div>
+        </div>
+        <p className={`font-roboto text-[#000000] text-[16px]`}>Recursive</p>
+      </label>
+     
+    
+
+          <div className="relative" onClick={() => !selected && setShowRecursive(!showRecursive)}>
             <div>
               <input
                 readOnly
-                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
-                placeholder={Role}
+                disabled={selected}
+                 className={`w-full outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border  rounded
+            ${selected ? "border-[#CED2E5] bg-[#D9DFFF] cursor-not-allowed" : "border-[#CED2E5] bg-white  "}`}
+          placeholder={
+            selected 
+              ? "On all month" 
+              : Recursive 
+                ? Recursive 
+                : "Select Month"
+          }
               />
-              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
-                {showRole ? <FaCaretUp /> : <FaCaretDown />}
+              <div className={`w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73] ${selected? "hidden" : ""}`}>
+                {showRecursive ? <FaCaretUp /> : <FaCaretDown />}
               </div>
               <div
-                className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
-                  showRole
-                    ? "opacity-100 h-auto visible overflow-auto"
+                className={`w-full overflow-y-scroll hide-scrollbar text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
+                  showRecursive
+                    ? "opacity-100 h-[250px] visible overflow-auto"
                     : "opacity-0 h-0 invisible overflow-hidden"
                 }`}
               >
-                {roles.map((item) => (
+                {months.map((item) => (
                   <div
                     key={item}
                     onClick={() => {
-                      setRole(item);
-                      setShowRole(false);
+                      setRecursive(item);
+                      setShowRecursive(false);
                     }}
                     className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
                   >
