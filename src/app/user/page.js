@@ -166,7 +166,7 @@ const page = () => {
           </div> */}
         </div>
       </form>
-      <div className="mt-8 w-[15%] flex justify-between mx-auto">
+      <div className="mt-8 w-[16%] flex justify-between mx-auto">
         <button
           onClick={() => setOpen(true)}
           className="bg-[#5069E5] py-[14px] px-8 text-white font-roboto rounded font-semibold">
