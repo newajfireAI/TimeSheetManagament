@@ -1,7 +1,8 @@
 import React from 'react'
+import ActivityPage from './ActivityPage'
 
 export default function activity() {
   return (
-    <div>This is Activity page</div>
+    <ActivityPage/>
   )
 }

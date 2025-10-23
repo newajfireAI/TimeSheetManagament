@@ -1,7 +1,8 @@
 import React from 'react'
+import TimeMangementSheet from './TimeMangementSheet'
 
 export default function timesheet() {
   return (
-    <div>This Time Sheet page</div>
+    <TimeMangementSheet/>
   )
 }

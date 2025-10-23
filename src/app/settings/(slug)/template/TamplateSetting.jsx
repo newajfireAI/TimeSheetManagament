@@ -247,7 +247,7 @@ export default function TamplateSetting() {
     }
   ]
 
-  const [uploadImage, setUploadImage] = useState(false)
+  const [viewTamplate, setViewTamplate] = useState(false)
   const clieckref = useRef(null)
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -270,7 +270,7 @@ export default function TamplateSetting() {
   ]
   const hendleClickOutSite = (e) => {
     if (clieckref.current.contains(e.target) === false) {
-      setUploadImage(false)
+      setViewTamplate(false)
     }
   }
   return (
@@ -297,7 +297,7 @@ export default function TamplateSetting() {
               <tbody className='bg-white'>
                 {
                   currentItems.map((item, idx) =>
-                    <tr >
+                    <tr key={idx} >
                       <td className='border-b-3 border-r-3 py-[22px] border-[#F0F0F2] rounded-xl p-2 text-center'>{item.No}</td>
                       <td className='border-b-3 pl-4 border-r-3 py-[22px] border-[#F0F0F2] rounded-xl p-2 text-left'>{item.TemplateName}</td>
                       <td className='border-b-3 pl-4 border-r-3 py-[22px] border-[#F0F0F2] rounded-xl p-2 text-left'>{item.TemplateType}</td>
@@ -309,7 +309,7 @@ export default function TamplateSetting() {
                           )
                         }
                       </td>
-                      <td onClick={() => setUploadImage(true)} className='border-b-3 border-[#F0F0F2] py-[22px] rounded-xl p-2 text-center text-[#0D2080]'>View</td>
+                      <td onClick={() => setViewTamplate(true)} className='border-b-3 border-[#F0F0F2] py-[22px] rounded-xl p-2 text-center text-[#0D2080]'>View</td>
                     </tr>
                   )
                 }
@@ -357,7 +357,7 @@ export default function TamplateSetting() {
         </div>
       </SettingsLayout>
 
-      <div onClick={hendleClickOutSite} className={`w-screen h-screen ${!uploadImage && 'hidden'}  ${uploadImage && 'absolute top-0 left-0 z-auto'} flex justify-center items-center shadow-2xl bg-[#00000052] `}>
+      <div onClick={hendleClickOutSite} className={`w-screen h-screen ${!viewTamplate && 'hidden'}  ${viewTamplate && 'absolute top-0 left-0 z-auto'} flex justify-center items-center shadow-2xl bg-[#00000052] `}>
         <div ref={clieckref} className='bg-white w-[427px] h-[294px] p-12 rounded-[8px] shadow '>
           <div className="text-black">
             <h2>
