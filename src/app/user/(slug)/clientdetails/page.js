@@ -27,6 +27,14 @@ const page = () => {
   const [Accmanager, setAccmanager] = useState("Select");
   const [showAccmanager, setShowAccmanager] = useState(false);
 
+  const bdmanager = ["Sajid", "Neaz", "Morshed"];
+  const [BDmanager, setBDmanager] = useState("Select");
+  const [showBDmanager, setShowBDmanager] = useState(false);
+
+  const recruiter = ["Sajid", "Neaz", "Morshed"];
+  const [Recruiter, setRecruiter] = useState("Select");
+  const [showRecruiter, setShowRecruiter] = useState(false);
+
   const period = ["Weekly", "Monthly", "Yearly"];
   const [Period, setPeriod] = useState("Weekly");
   const [showPeriod, setShowPeriod] = useState(false);
@@ -34,6 +42,14 @@ const page = () => {
   const commission = ["Gross margin", "Gross margin2", "Gross margin3"];
   const [Commission, setCommission] = useState("Gross margin");
   const [showCommission, setShowCommission] = useState(false);
+
+  const commission2 = ["Gross margin", "Gross margin2", "Gross margin3"];
+  const [Commission2, setCommission2] = useState("Gross margin");
+  const [showCommission2, setShowCommission2] = useState(false);
+
+  const commission3 = ["Gross margin", "Gross margin2", "Gross margin3"];
+  const [Commission3, setCommission3] = useState("Gross margin");
+  const [showCommission3, setShowCommission3] = useState(false);
 
    const rate = ["Percentage", "Fixed"];
   const [Rate, setRate] = useState("Percentage");
@@ -621,9 +637,391 @@ const page = () => {
             </div>
           </div>
         </div>
+
+
+
+        <div className="flex flex-col gap-2  ">
+          <label className="font-roboto text-[#000000] text-[16px]">
+            BD Manager<span className="text-[#F46B6A]">*</span>
+          </label>
+          <div className="relative" onClick={() => setShowBDmanager(!showBDmanager)}>
+            <div>
+              <input
+                readOnly
+                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+                placeholder={BDmanager}
+              />
+              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
+                {showBDmanager ? <FaCaretUp /> : <FaCaretDown />}
+              </div>
+              <div
+                className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
+                  showBDmanager
+                    ? "opacity-100 h-auto visible overflow-auto"
+                    : "opacity-0 h-0 invisible overflow-hidden"
+                }`}
+              >
+                {bdmanager.map((item) => (
+                  <div
+                    key={item}
+                    onClick={() => {
+                      setBDmanager(item);
+                      setShowBDmanager(false);
+                    }}
+                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2  ">
+          <label className="font-roboto text-[#000000] text-[16px]">
+           Commission<span className="text-[#F46B6A]">*</span>
+          </label>
+
+          <input
+            className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+            placeholder="Enter Commission"
+          />
+        </div>
+        <div className="flex flex-col gap-2  ">
+          <label className="font-roboto text-[#000000] text-[16px]">
+            Commission on<span className="text-[#F46B6A]">*</span>
+          </label>
+          <div className="relative" onClick={() => setShowCommission2(!showCommission2)}>
+            <div>
+              <input
+                readOnly
+                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+                placeholder={Commission2}
+              />
+              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
+                {showCommission2 ? <FaCaretUp /> : <FaCaretDown />}
+              </div>
+              <div
+                className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
+                  showCommission2
+                    ? "opacity-100 h-auto visible overflow-auto"
+                    : "opacity-0 h-0 invisible overflow-hidden"
+                }`}
+              >
+                {commission2.map((item) => (
+                  <div
+                    key={item}
+                    onClick={() => {
+                      setCommission2(item);
+                      setShowCommission2(false);
+                    }}
+                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2  ">
+          <label className="font-roboto text-[#000000] text-[16px]">
+            Rate type<span className="text-[#F46B6A]">*</span>
+          </label>
+          <div className="relative" onClick={() => setShowRate(!showRate)}>
+            <div>
+              <input
+                readOnly
+                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+                placeholder={Rate}
+              />
+              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
+                {showRate ? <FaCaretUp /> : <FaCaretDown />}
+              </div>
+              <div
+                className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
+                  showRate
+                    ? "opacity-100 h-auto visible overflow-auto"
+                    : "opacity-0 h-0 invisible overflow-hidden"
+                }`}
+              >
+                {rate.map((item) => (
+                  <div
+                    key={item}
+                    onClick={() => {
+                      setRate(item);
+                      setShowRate(false);
+                    }}
+                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+         <div className="flex flex-col gap-2  ">
+
+          <label
+        className={`flex items-center gap-2  cursor-pointer transition 
+        ${selected  ? "" : ""}`}
+      >
+        <input
+          type="radio"
+          name="plan"
+          value="Recursive"
+          checked={selected}
+          onClick={() => setSelected(!selected)}
+          className="hidden"
+        />
+        <div
+          className={`w-5 h-5 rounded-full border-2 flex items-center justify-center 
+          ${selected  ? "border-[#5069E5]/30 " : "border-[#DFE0E5] "}`}
+        >
+          <div className={`w-3 h-3 bg-[#5069E5] rounded-full ${selected? "bg-[#5069E5] " : "bg-[#DFE0E5] "}`}></div>
+        </div>
+        <p className={`font-roboto text-[#000000] text-[16px]`}>Recursive</p>
+      </label>
+     
+    
+
+          <div className="relative" onClick={() => !selected && setShowRecursive(!showRecursive)}>
+            <div>
+              <input
+                readOnly
+                disabled={selected}
+                 className={`w-full outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border  rounded
+            ${selected ? "border-[#CED2E5] bg-[#D9DFFF] cursor-not-allowed" : "border-[#CED2E5] bg-white  "}`}
+          placeholder={
+            selected 
+              ? "On all month" 
+              : Recursive 
+                ? Recursive 
+                : "Select Month"
+          }
+              />
+              <div className={`w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73] ${selected? "hidden" : ""}`}>
+                {showRecursive ? <FaCaretUp /> : <FaCaretDown />}
+              </div>
+              <div
+                className={`w-full overflow-y-scroll hide-scrollbar text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
+                  showRecursive
+                    ? "opacity-100 h-[250px] visible overflow-auto"
+                    : "opacity-0 h-0 invisible overflow-hidden"
+                }`}
+              >
+                {months.map((item) => (
+                  <div
+                    key={item}
+                    onClick={() => {
+                      setRecursive(item);
+                      setShowRecursive(false);
+                    }}
+                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2  ">
+          <label className="font-roboto text-[#000000] text-[16px]">
+            Recruiter<span className="text-[#F46B6A]">*</span>
+          </label>
+          <div className="relative" onClick={() => setShowRecruiter(!showRecruiter)}>
+            <div>
+              <input
+                readOnly
+                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+                placeholder={Recruiter}
+              />
+              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
+                {showRecruiter ? <FaCaretUp /> : <FaCaretDown />}
+              </div>
+              <div
+                className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
+                  showRecruiter
+                    ? "opacity-100 h-auto visible overflow-auto"
+                    : "opacity-0 h-0 invisible overflow-hidden"
+                }`}
+              >
+                {recruiter.map((item) => (
+                  <div
+                    key={item}
+                    onClick={() => {
+                      setRecruiter(item);
+                      setShowRecruiter(false);
+                    }}
+                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2  ">
+          <label className="font-roboto text-[#000000] text-[16px]">
+           Commission<span className="text-[#F46B6A]">*</span>
+          </label>
+
+          <input
+            className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+            placeholder="Enter Commission"
+          />
+        </div>
+        <div className="flex flex-col gap-2  ">
+          <label className="font-roboto text-[#000000] text-[16px]">
+            Commission on<span className="text-[#F46B6A]">*</span>
+          </label>
+          <div className="relative" onClick={() => setShowCommission3(!showCommission3)}>
+            <div>
+              <input
+                readOnly
+                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+                placeholder={Commission3}
+              />
+              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
+                {showCommission3 ? <FaCaretUp /> : <FaCaretDown />}
+              </div>
+              <div
+                className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
+                  showCommission3
+                    ? "opacity-100 h-auto visible overflow-auto"
+                    : "opacity-0 h-0 invisible overflow-hidden"
+                }`}
+              >
+                {commission3.map((item) => (
+                  <div
+                    key={item}
+                    onClick={() => {
+                      setCommission3(item);
+                      setShowCommission3(false);
+                    }}
+                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2  ">
+          <label className="font-roboto text-[#000000] text-[16px]">
+            Rate type<span className="text-[#F46B6A]">*</span>
+          </label>
+          <div className="relative" onClick={() => setShowRate(!showRate)}>
+            <div>
+              <input
+                readOnly
+                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
+                placeholder={Rate}
+              />
+              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
+                {showRate ? <FaCaretUp /> : <FaCaretDown />}
+              </div>
+              <div
+                className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
+                  showRate
+                    ? "opacity-100 h-auto visible overflow-auto"
+                    : "opacity-0 h-0 invisible overflow-hidden"
+                }`}
+              >
+                {rate.map((item) => (
+                  <div
+                    key={item}
+                    onClick={() => {
+                      setRate(item);
+                      setShowRate(false);
+                    }}
+                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+         <div className="flex flex-col gap-2  ">
+
+          <label
+        className={`flex items-center gap-2  cursor-pointer transition 
+        ${selected  ? "" : ""}`}
+      >
+        <input
+          type="radio"
+          name="plan"
+          value="Recursive"
+          checked={selected}
+          onClick={() => setSelected(!selected)}
+          className="hidden"
+        />
+        <div
+          className={`w-5 h-5 rounded-full border-2 flex items-center justify-center 
+          ${selected  ? "border-[#5069E5]/30 " : "border-[#DFE0E5] "}`}
+        >
+          <div className={`w-3 h-3 bg-[#5069E5] rounded-full ${selected? "bg-[#5069E5] " : "bg-[#DFE0E5] "}`}></div>
+        </div>
+        <p className={`font-roboto text-[#000000] text-[16px]`}>Recursive</p>
+      </label>
+     
+    
+
+          <div className="relative" onClick={() => !selected && setShowRecursive(!showRecursive)}>
+            <div>
+              <input
+                readOnly
+                disabled={selected}
+                 className={`w-full outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border  rounded
+            ${selected ? "border-[#CED2E5] bg-[#D9DFFF] cursor-not-allowed" : "border-[#CED2E5] bg-white  "}`}
+          placeholder={
+            selected 
+              ? "On all month" 
+              : Recursive 
+                ? Recursive 
+                : "Select Month"
+          }
+              />
+              <div className={`w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73] ${selected? "hidden" : ""}`}>
+                {showRecursive ? <FaCaretUp /> : <FaCaretDown />}
+              </div>
+              <div
+                className={`w-full overflow-y-scroll hide-scrollbar text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
+                  showRecursive
+                    ? "opacity-100 h-[250px] visible overflow-auto"
+                    : "opacity-0 h-0 invisible overflow-hidden"
+                }`}
+              >
+                {months.map((item) => (
+                  <div
+                    key={item}
+                    onClick={() => {
+                      setRecursive(item);
+                      setShowRecursive(false);
+                    }}
+                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-       <div className=" flex flex-row justify-center gap-4 pb-12">
+       <div className=" flex flex-row justify-center gap-4 pb-12 mt-12">
                <button
        
         className="bg-[#5069E5] py-[14px] px-8 text-white font-roboto rounded font-semibold">
