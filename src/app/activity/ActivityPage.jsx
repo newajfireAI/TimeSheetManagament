@@ -1,4 +1,5 @@
 "use client"
+import Table from '@/components/Table';
 import React, { useEffect, useState } from 'react'
 
 export default function ActivityPage() {
@@ -13,7 +14,17 @@ export default function ActivityPage() {
         { title: "Supervisor" }
     ]
 
-    const data = [
+    const TableHeads = [
+        { Title: "No", key: "No", width: "5%" },
+        { Title: "Created by", key: "Created_by", width: "20%" },
+        { Title: "Date", key: "Date", width: "15%" },
+        { Title: "Role", key: "Role", width: "20%", render: (row) => <span className="text-blue-500">{row.Role}</span> },
+        { Title: "Activities", key: "Activities", width: "40%" },
+    ];
+
+
+
+    const TableRows = [
         { No: 1, Created_by: "James Carter", Date: "15 Oct 2025", Role: "Admin", Activities: "Updated user permissions" },
         { No: 2, Created_by: "Linda Moore", Date: "15 Oct 2025", Role: "User", Activities: "Timesheet Submit" },
         { No: 3, Created_by: "Robert Diaz", Date: "15 Oct 2025", Role: "Supervisor", Activities: "Reviewed project logs" },
@@ -49,15 +60,15 @@ export default function ActivityPage() {
     const hendleTab = (title) => {
         setActive(title)
         if (title === "All") {
-            setBaseOnTitle(data)
+            setBaseOnTitle(TableRows)
         } else {
-            const checkTilte = data.filter(data => data.Role === title)
+            const checkTilte = TableRows.filter(data => data.Role === title)
             setBaseOnTitle(checkTilte);
         }
     }
 
     useEffect(() => {
-        setBaseOnTitle(data)
+        setBaseOnTitle(TableRows)
     }, [])
 
 
@@ -78,30 +89,7 @@ export default function ActivityPage() {
             </div>
 
             <div>
-                <table className='w-full my-6'>
-                    <thead className='' >
-                        <tr className='bg-[#D9DFFF] w-full '>
-                            <th className='text-center border-b-3 border-r-3 font-medium text-[#0C0C0D] py-[22px] border-[#F0F0F2] rounded-b-xl rounded-tl-2xl w-[5%]'>No</th>
-                            <th className='text-left pl-4 border-b-3 border-r-3 font-medium text-[#0C0C0D] py-[22px] border-[#F0F0F2] rounded-b-xl w-[20%]'>Created by</th>
-                            <th className='text-left pl-4 border-b-3 border-r-3 font-medium text-[#0C0C0D] py-[22px] border-[#F0F0F2] rounded-b-xl w-[15%]'>Date</th>
-                            <th className='text-left pl-4 border-b-3 border-r-3 font-medium text-[#0C0C0D] py-[22px] border-[#F0F0F2] rounded-b-xl w-[20%]'>Role</th>
-                            <th className='text-left pl-4 border-b-3 border-r-3 font-medium text-[#0C0C0D] py-[22px] border-[#F0F0F2] rounded-b-xl w-[40%] rounded-tr-2xl'>Activities</th>
-                        </tr>
-                    </thead>
-                    <tbody className='bg-white'>
-                        {
-                            currentItems.map((item, idx) =>
-                                <tr key={idx} >
-                                    <td className='border-b-3 border-r-3 py-[22px] border-[#F0F0F2] rounded-xl p-2 text-center'>{item.No}</td>
-                                    <td className='border-b-3 pl-4 border-r-3 py-[22px] border-[#F0F0F2] rounded-xl p-2 text-left'>{item.Created_by}</td>
-                                    <td className='border-b-3 pl-4 border-r-3 py-[22px] border-[#F0F0F2] rounded-xl p-2 text-left'>{item.Date}</td>
-                                    <td className='border-b-3 pl-4 border-r-3 py-[22px] border-[#F0F0F2] rounded-xl p-2 text-left'>{item.Role}</td>
-                                    <td className='border-b-3 pl-4 border-r-3 py-[22px] border-[#F0F0F2] rounded-xl p-2 text-left'>{item.Activities}</td>
-                                </tr>
-                            )
-                        }
-                    </tbody>
-                </table>
+                <Table TableHeads={TableHeads} TableRows={currentItems} />
             </div>
 
             <div className='mb-10 py-6'>

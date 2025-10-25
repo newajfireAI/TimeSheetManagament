@@ -2,6 +2,7 @@
 import { useRef, useState } from "react";
 import SettingsLayout from '../../SettingsLayout'
 import { FaPlus } from "react-icons/fa6";
+import Table from "@/components/Table";
 
 export default function TamplateSetting() {
   const items = [
@@ -268,6 +269,16 @@ export default function TamplateSetting() {
       Role: "Supervisor"
     },
   ]
+
+  const TableHeads = [
+    { Title: "No", key:"No", width: '5%' },
+    { Title: "Template name",key:"TemplateName", width: '20%' },
+    { Title: "Template type",key:"TemplateType", width: '15%' },
+    { Title: "Subject",key:"Subject", width: '20%' },
+    { Title: "Permission",key:"Permission", width: '40%', render: (row) => <span className="text-blue-500">{row.Role}</span> },
+    { Title: "Action",key:"Action", width: '40%' },
+  ];
+
   const hendleClickOutSite = (e) => {
     if (clieckref.current.contains(e.target) === false) {
       setViewTamplate(false)
@@ -283,7 +294,18 @@ export default function TamplateSetting() {
           </div>
 
           <div>
-            <table className='w-full my-6'>
+
+            <Table TableHeads={TableHeads} TableRows={currentItems}>
+              {
+                permission.map((role, idx) =>
+                  <span key={idx} className={`${role.Role === "admin" && "text-[#E5D416] bg-[#FFFEF5]"} ${role.Role === "User" && "text-[#5069E5] bg-[#F7F9FF]"} ${role.Role === "Supervisor" && "text-[#1B654A] bg-[#F7FFFC]"} px-2 py-1 rounded-full mx-2`}>{role.Role}</span>
+                )
+              }
+            </Table>
+
+
+
+            {/* <table className='w-full my-6'>
               <thead className='' >
                 <tr className='bg-[#D9DFFF] w-full '>
                   <th className='text-center border-b-3 border-r-3 font-medium text-[#0C0C0D] py-[22px] border-[#F0F0F2] rounded-b-xl rounded-tl-2xl w-[4%]'>No</th>
@@ -303,11 +325,7 @@ export default function TamplateSetting() {
                       <td className='border-b-3 pl-4 border-r-3 py-[22px] border-[#F0F0F2] rounded-xl p-2 text-left'>{item.TemplateType}</td>
                       <td className='border-b-3 pl-4 border-r-3 py-[22px] border-[#F0F0F2] rounded-xl p-2 text-left'>{item.Subject}</td>
                       <td className='border-b-3 pl-4 border-r-3 py-[22px] border-[#F0F0F2] rounded-xl p-2 text-left'>
-                        {
-                          permission.map((role, idx) =>
-                            <span key={idx} className={`${role.Role === "admin" && "text-[#E5D416] bg-[#FFFEF5]"} ${role.Role === "User" && "text-[#5069E5] bg-[#F7F9FF]"} ${role.Role === "Supervisor" && "text-[#1B654A] bg-[#F7FFFC]"} px-2 py-1 rounded-full mx-2`}>{role.Role}</span>
-                          )
-                        }
+
                       </td>
                       <td onClick={() => setViewTamplate(true)} className='border-b-3 border-[#F0F0F2] py-[22px] rounded-xl p-2 text-center text-[#0D2080]'>View</td>
                     </tr>
@@ -316,7 +334,7 @@ export default function TamplateSetting() {
 
 
               </tbody>
-            </table>
+            </table> */}
 
           </div>
 
