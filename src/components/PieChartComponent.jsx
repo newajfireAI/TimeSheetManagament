@@ -6,7 +6,7 @@ import { FaArrowLeft, FaArrowRight, FaCaretLeft, FaCaretRight } from "react-icon
 const COLORS = ["#1B654A", "#F46B6A", "#E5D416"];
 const STATUS = ["Approved", "Pending", "Rejected"];
 
-export default function PieChartComponent() {
+export default function PieChartComponent({className}) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleNext = () => {
@@ -24,9 +24,13 @@ export default function PieChartComponent() {
   ];
 
   const currentStatus = STATUS[activeIndex];
+  
+  const handleClick = (_, index) => {
+    setActiveIndex(index);
+  };
 
   return (
-    <div className=" w-[474px p-5 rounded-2xl  flex flex-col items-center relative">
+    <div className={`   flex flex-col items-center relative ${className}`}>
       <h2 className="font-semibold font-roboto text-black mb-3">Time sheet Analytics</h2>
 
       
@@ -40,6 +44,7 @@ export default function PieChartComponent() {
             fill="#8884d8"
             dataKey="value"
             labelLine={false}
+            onClick={handleClick}
           >
             {data.map((entry, index) => (
               <Cell

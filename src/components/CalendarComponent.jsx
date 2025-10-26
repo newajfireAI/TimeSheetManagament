@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { FaCaretLeft, FaCaretRight, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-export default function CalendarComponent() {
+export default function CalendarComponent({className}) {
   const today = new Date();
   const [currentDate, setCurrentDate] = useState(today);
 
@@ -38,7 +38,7 @@ export default function CalendarComponent() {
   };
 
   return (
-    <div className="p- ">
+    <div className={`${className}`}>
       <h2 className="font-medium text-[#0C0C0D] font-roboto text-[20px] mb-4">Calendar</h2>
 
       <div className=" rounded-xl p-4 bg-white" >
