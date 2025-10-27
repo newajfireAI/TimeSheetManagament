@@ -46,7 +46,7 @@ const Dropdown = ({
           <input
             readOnly
             value={selected || ""}
-            className={`w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] border border-[#CED2E5] rounded cursor-pointer ${inputClass}`}
+            className={`w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] placeholder:text-[#6D6E73] font-roboto text-[16px] border border-[#CED2E5] rounded cursor-pointer ${inputClass}`}
             placeholder={placeholder}
           />
 
