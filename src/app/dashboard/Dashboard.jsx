@@ -4,6 +4,7 @@ import CalendarComponent from '@/components/CalendarComponent'
 import DateComponent from '@/components/DateComponent'
 import PieChartComponent from '@/components/PieChartComponent'
 import SalesAnalyticsCard from '@/components/SalesAnalyticsCard'
+import Link from 'next/link'
 import React, { useState } from 'react'
 import { GoPlus } from "react-icons/go";
 import { IoMdArrowDropdown } from "react-icons/io";
@@ -24,8 +25,10 @@ export default function Dashboard() {
       <div className=' flex  items-center  gap-12 w-[60%] '>
       <DateComponent/>
        <button className='  flex items-center gap-2 bg-[#5069E5] text-white font-roboto font-medium text-[20px] px-3 py-2 rounded-md '>
+        <Link href="/dashboard/addTimesheet" className='flex items-center gap-2 '>
         <GoPlus className='w-6 h-6' />
         Create timesheet
+         </Link>
         </button>
 
      </div>

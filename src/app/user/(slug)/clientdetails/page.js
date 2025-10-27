@@ -1,4 +1,5 @@
 "use client";
+import Dropdown from "@/components/Dropdown";
 import Radio from "@/components/Radio";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,9 +8,7 @@ import { FaArrowRight, FaCaretDown, FaCaretUp, FaPlus } from "react-icons/fa";
 import { MdModeEdit } from "react-icons/md";
 
 const page = () => {
-  const roles = ["Client", "Vendor", "Employee"];
-  const [Role, setRole] = useState("Client");
-  const [showRole, setShowRole] = useState(false);
+ 
 
   const clientname = ["Sajid", "Neaz", "Morshed"];
   const [Client, setClient] = useState("Select Client");
@@ -23,33 +22,13 @@ const page = () => {
   const [Employee, setEmployee] = useState("Select Employee");
   const [showEmployee, setShowEmployee] = useState(false);
 
-  const accmanager = ["Sajid", "Neaz", "Morshed"];
-  const [Accmanager, setAccmanager] = useState("Select");
-  const [showAccmanager, setShowAccmanager] = useState(false);
+  
 
-  const bdmanager = ["Sajid", "Neaz", "Morshed"];
-  const [BDmanager, setBDmanager] = useState("Select");
-  const [showBDmanager, setShowBDmanager] = useState(false);
 
-  const recruiter = ["Sajid", "Neaz", "Morshed"];
-  const [Recruiter, setRecruiter] = useState("Select");
-  const [showRecruiter, setShowRecruiter] = useState(false);
 
-  const period = ["Weekly", "Monthly", "Yearly"];
-  const [Period, setPeriod] = useState("Weekly");
-  const [showPeriod, setShowPeriod] = useState(false);
 
-  const commission = ["Gross margin", "Gross margin2", "Gross margin3"];
-  const [Commission, setCommission] = useState("Gross margin");
-  const [showCommission, setShowCommission] = useState(false);
 
-  const commission2 = ["Gross margin", "Gross margin2", "Gross margin3"];
-  const [Commission2, setCommission2] = useState("Gross margin");
-  const [showCommission2, setShowCommission2] = useState(false);
 
-  const commission3 = ["Gross margin", "Gross margin2", "Gross margin3"];
-  const [Commission3, setCommission3] = useState("Gross margin");
-  const [showCommission3, setShowCommission3] = useState(false);
 
    const rate = ["Percentage", "Fixed"];
   const [Rate, setRate] = useState("Percentage");
@@ -98,46 +77,20 @@ const page = () => {
   const [selected2, setSelected2]= useState(null);
   const [selected3, setSelected3]= useState(null);
 
+  const handleOptionSelect = (option) => {
+    console.log("Selected:", option);
+  };
+
   return (
     <div>
       <div className="grid grid-cols-8 grid-rows-3 gap-x-8 gap-y-6">
-        <div className="flex flex-col gap-2  col-span-2">
-          <label className="font-roboto text-[#000000] text-[16px]">
-            Invoice to<span className="text-[#F46B6A]">*</span>
-          </label>
-          <div className="relative" onClick={() => setShowRole(!showRole)}>
-            <div>
-              <input
-                readOnly
-                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
-                placeholder={Role}
-              />
-              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
-                {showRole ? <FaCaretUp /> : <FaCaretDown />}
-              </div>
-              <div
-                className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
-                  showRole
-                    ? "opacity-100 h-auto visible overflow-auto"
-                    : "opacity-0 h-0 invisible overflow-hidden"
-                }`}
-              >
-                {roles.map((item) => (
-                  <div
-                    key={item}
-                    onClick={() => {
-                      setRole(item);
-                      setShowRole(false);
-                    }}
-                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+        <Dropdown
+                  label="Invoice to"
+                  placeholder="Select Invoice to"
+                  options={["User", "Vender", "Employee"]}
+                  onSelect={handleOptionSelect}
+                  className='col-span-2'
+                  />
 
         <div className="flex flex-col gap-2  col-span-2">
           <label className="font-roboto text-[#000000] text-[16px]">
@@ -239,43 +192,13 @@ const page = () => {
           />
         </div>
 
-        <div className="flex flex-col gap-2  col-span-2">
-          <label className="font-roboto text-[#000000] text-[16px]">
-            Timesheet period<span className="text-[#F46B6A]">*</span>
-          </label>
-          <div className="relative" onClick={() => setShowPeriod(!showPeriod)}>
-            <div>
-              <input
-                readOnly
-                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
-                placeholder={Period}
-              />
-              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
-                {showPeriod ? <FaCaretUp /> : <FaCaretDown />}
-              </div>
-              <div
-                className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
-                  showPeriod
-                    ? "opacity-100 h-auto visible overflow-auto"
-                    : "opacity-0 h-0 invisible overflow-hidden"
-                }`}
-              >
-                {period.map((item) => (
-                  <div
-                    key={item}
-                    onClick={() => {
-                      setPeriod(item);
-                      setShowPeriod(false);
-                    }}
-                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+        <Dropdown
+                  label="Timesheet period"
+                  placeholder="Select Timesheet Period"
+                  options={["Weekly", "Monthly", "Yearly"]}
+                  onSelect={handleOptionSelect}
+                  className='col-span-2'
+                  />
 
         <div className="flex flex-col gap-2  col-span-3">
           <label className="font-roboto text-[#000000] text-[16px]">
@@ -464,43 +387,13 @@ const page = () => {
       </div>
 
       <div className="grid grid-cols-5 grid-rows-3 gap-x-8 gap-y-6 mt-16">
-        <div className="flex flex-col gap-2  ">
-          <label className="font-roboto text-[#000000] text-[16px]">
-            Account manager<span className="text-[#F46B6A]">*</span>
-          </label>
-          <div className="relative" onClick={() => setShowAccmanager(!showAccmanager)}>
-            <div>
-              <input
-                readOnly
-                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
-                placeholder={Accmanager}
-              />
-              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
-                {showAccmanager ? <FaCaretUp /> : <FaCaretDown />}
-              </div>
-              <div
-                className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
-                  showAccmanager
-                    ? "opacity-100 h-auto visible overflow-auto"
-                    : "opacity-0 h-0 invisible overflow-hidden"
-                }`}
-              >
-                {accmanager.map((item) => (
-                  <div
-                    key={item}
-                    onClick={() => {
-                      setAccmanager(item);
-                      setShowAccmanager(false);
-                    }}
-                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+       <Dropdown
+                  label="Account manager"
+                  placeholder="Select Account Manager"
+                  options={["Sajid", "Neaz", "Morshed"]}
+                  onSelect={handleOptionSelect}
+                 
+                  />
 
         <div className="flex flex-col gap-2  ">
           <label className="font-roboto text-[#000000] text-[16px]">
@@ -512,81 +405,21 @@ const page = () => {
             placeholder="Enter Commission"
           />
         </div>
-        <div className="flex flex-col gap-2  ">
-          <label className="font-roboto text-[#000000] text-[16px]">
-            Commission on<span className="text-[#F46B6A]">*</span>
-          </label>
-          <div className="relative" onClick={() => setShowCommission(!showCommission)}>
-            <div>
-              <input
-                readOnly
-                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
-                placeholder={Commission}
-              />
-              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
-                {showCommission ? <FaCaretUp /> : <FaCaretDown />}
-              </div>
-              <div
-                className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
-                  showCommission
-                    ? "opacity-100 h-auto visible overflow-auto"
-                    : "opacity-0 h-0 invisible overflow-hidden"
-                }`}
-              >
-                {commission.map((item) => (
-                  <div
-                    key={item}
-                    onClick={() => {
-                      setCommission(item);
-                      setShowCommission(false);
-                    }}
-                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+         <Dropdown
+                  label="Commission on"
+                  placeholder="Select Commission"
+                  options={["Gross margin", "Gross margin2", "Gross margin3"]}
+                  onSelect={handleOptionSelect}
+                 
+                  />
 
-        <div className="flex flex-col gap-2  ">
-          <label className="font-roboto text-[#000000] text-[16px]">
-            Rate type<span className="text-[#F46B6A]">*</span>
-          </label>
-          <div className="relative" onClick={() => setShowRate(!showRate)}>
-            <div>
-              <input
-                readOnly
-                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
-                placeholder={Rate}
-              />
-              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
-                {showRate ? <FaCaretUp /> : <FaCaretDown />}
-              </div>
-              <div
-                className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
-                  showRate
-                    ? "opacity-100 h-auto visible overflow-auto"
-                    : "opacity-0 h-0 invisible overflow-hidden"
-                }`}
-              >
-                {rate.map((item) => (
-                  <div
-                    key={item}
-                    onClick={() => {
-                      setRate(item);
-                      setShowRate(false);
-                    }}
-                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+         <Dropdown
+                  label="Rate Type"
+                  placeholder="Select Rate Type"
+                  options={["Percentage", "Fixed"]}
+                  onSelect={handleOptionSelect}
+                 
+                  />
          <div className="flex flex-col gap-2  ">
 
           <label
@@ -656,43 +489,13 @@ const page = () => {
 
 
 
-        <div className="flex flex-col gap-2  ">
-          <label className="font-roboto text-[#000000] text-[16px]">
-            BD Manager<span className="text-[#F46B6A]">*</span>
-          </label>
-          <div className="relative" onClick={() => setShowBDmanager(!showBDmanager)}>
-            <div>
-              <input
-                readOnly
-                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
-                placeholder={BDmanager}
-              />
-              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
-                {showBDmanager ? <FaCaretUp /> : <FaCaretDown />}
-              </div>
-              <div
-                className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
-                  showBDmanager
-                    ? "opacity-100 h-auto visible overflow-auto"
-                    : "opacity-0 h-0 invisible overflow-hidden"
-                }`}
-              >
-                {bdmanager.map((item) => (
-                  <div
-                    key={item}
-                    onClick={() => {
-                      setBDmanager(item);
-                      setShowBDmanager(false);
-                    }}
-                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+       <Dropdown
+                  label="BD manager"
+                  placeholder="Select BD Manager"
+                  options={["Sajid", "Neaz", "Morshed"]}
+                  onSelect={handleOptionSelect}
+                 
+                  />
 
         <div className="flex flex-col gap-2  ">
           <label className="font-roboto text-[#000000] text-[16px]">
@@ -704,81 +507,21 @@ const page = () => {
             placeholder="Enter Commission"
           />
         </div>
-        <div className="flex flex-col gap-2  ">
-          <label className="font-roboto text-[#000000] text-[16px]">
-            Commission on<span className="text-[#F46B6A]">*</span>
-          </label>
-          <div className="relative" onClick={() => setShowCommission2(!showCommission2)}>
-            <div>
-              <input
-                readOnly
-                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
-                placeholder={Commission2}
-              />
-              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
-                {showCommission2 ? <FaCaretUp /> : <FaCaretDown />}
-              </div>
-              <div
-                className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
-                  showCommission2
-                    ? "opacity-100 h-auto visible overflow-auto"
-                    : "opacity-0 h-0 invisible overflow-hidden"
-                }`}
-              >
-                {commission2.map((item) => (
-                  <div
-                    key={item}
-                    onClick={() => {
-                      setCommission2(item);
-                      setShowCommission2(false);
-                    }}
-                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+        <Dropdown
+                  label="Commission on"
+                  placeholder="Select Commission"
+                  options={["Gross margin", "Gross margin2", "Gross margin3"]}
+                  onSelect={handleOptionSelect}
+                 
+                  />
 
-        <div className="flex flex-col gap-2  ">
-          <label className="font-roboto text-[#000000] text-[16px]">
-            Rate type<span className="text-[#F46B6A]">*</span>
-          </label>
-          <div className="relative" onClick={() => setShowRate2(!showRate2)}>
-            <div>
-              <input
-                readOnly
-                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
-                placeholder={Rate2}
-              />
-              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
-                {showRate2 ? <FaCaretUp /> : <FaCaretDown />}
-              </div>
-              <div
-                className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
-                  showRate2
-                    ? "opacity-100 h-auto visible overflow-auto"
-                    : "opacity-0 h-0 invisible overflow-hidden"
-                }`}
-              >
-                {rate2.map((item) => (
-                  <div
-                    key={item}
-                    onClick={() => {
-                      setRate2(item);
-                      setShowRate2(false);
-                    }}
-                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+        <Dropdown
+                  label="Rate Type"
+                  placeholder="Select Rate Type"
+                  options={["Percentage", "Fixed"]}
+                  onSelect={handleOptionSelect}
+                 
+                  />
          <div className="flex flex-col gap-2  ">
 
           <label
@@ -846,43 +589,12 @@ const page = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2  ">
-          <label className="font-roboto text-[#000000] text-[16px]">
-            Recruiter<span className="text-[#F46B6A]">*</span>
-          </label>
-          <div className="relative" onClick={() => setShowRecruiter(!showRecruiter)}>
-            <div>
-              <input
-                readOnly
-                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
-                placeholder={Recruiter}
-              />
-              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
-                {showRecruiter ? <FaCaretUp /> : <FaCaretDown />}
-              </div>
-              <div
-                className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
-                  showRecruiter
-                    ? "opacity-100 h-auto visible overflow-auto"
-                    : "opacity-0 h-0 invisible overflow-hidden"
-                }`}
-              >
-                {recruiter.map((item) => (
-                  <div
-                    key={item}
-                    onClick={() => {
-                      setRecruiter(item);
-                      setShowRecruiter(false);
-                    }}
-                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+        <Dropdown
+                  label="Recruiter"
+                  placeholder="Select Recruiter"
+                  options={["Sajid", "Neaz", "Morshed"]}
+                  onSelect={handleOptionSelect}                 
+                  />
 
         <div className="flex flex-col gap-2  ">
           <label className="font-roboto text-[#000000] text-[16px]">
@@ -894,81 +606,21 @@ const page = () => {
             placeholder="Enter Commission"
           />
         </div>
-        <div className="flex flex-col gap-2  ">
-          <label className="font-roboto text-[#000000] text-[16px]">
-            Commission on<span className="text-[#F46B6A]">*</span>
-          </label>
-          <div className="relative" onClick={() => setShowCommission3(!showCommission3)}>
-            <div>
-              <input
-                readOnly
-                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
-                placeholder={Commission3}
-              />
-              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
-                {showCommission3 ? <FaCaretUp /> : <FaCaretDown />}
-              </div>
-              <div
-                className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
-                  showCommission3
-                    ? "opacity-100 h-auto visible overflow-auto"
-                    : "opacity-0 h-0 invisible overflow-hidden"
-                }`}
-              >
-                {commission3.map((item) => (
-                  <div
-                    key={item}
-                    onClick={() => {
-                      setCommission3(item);
-                      setShowCommission3(false);
-                    }}
-                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+         <Dropdown
+                  label="Commission on"
+                  placeholder="Select Commission"
+                  options={["Gross margin", "Gross margin2", "Gross margin3"]}
+                  onSelect={handleOptionSelect}
+                 
+                  />
 
-        <div className="flex flex-col gap-2  ">
-          <label className="font-roboto text-[#000000] text-[16px]">
-            Rate type<span className="text-[#F46B6A]">*</span>
-          </label>
-          <div className="relative" onClick={() => setShowRate3(!showRate3)}>
-            <div>
-              <input
-                readOnly
-                className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
-                placeholder={Rate3}
-              />
-              <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
-                {showRate3 ? <FaCaretUp /> : <FaCaretDown />}
-              </div>
-              <div
-                className={`w-full text-center bg-white font-roboto text-[14px] text-[#333333] z-30 absolute ${
-                  showRate3
-                    ? "opacity-100 h-auto visible overflow-auto"
-                    : "opacity-0 h-0 invisible overflow-hidden"
-                }`}
-              >
-                {rate3.map((item) => (
-                  <div
-                    key={item}
-                    onClick={() => {
-                      setRate3(item);
-                      setShowRate3(false);
-                    }}
-                    className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+       <Dropdown
+                  label="Rate Type"
+                  placeholder="Select Rate Type"
+                  options={["Percentage", "Fixed"]}
+                  onSelect={handleOptionSelect}
+                 
+                  />
          <div className="flex flex-col gap-2  ">
 
           <label
