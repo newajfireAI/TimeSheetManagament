@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import SettingsLayout from '../../SettingsLayout'
 import { FaPlus } from "react-icons/fa6";
 import Table from "@/components/Table";
+import Link from "next/link";
 
 export default function TamplateSetting() {
   const items = [
@@ -290,7 +291,11 @@ export default function TamplateSetting() {
       <SettingsLayout>
         <div>
           <div className='flex justify-end'>
-            <button className='bg-[#5069E5] text-sm text-[#ffffff] px-3 py-2 flex items-center gap-4 rounded-sm'><FaPlus /> Create template</button>
+            <button className='bg-[#5069E5] text-sm text-[#ffffff] px-3 py-2  rounded-sm'>
+              <Link href='/settings/template/createTemplate' className='flex items-center gap-4'>
+            <FaPlus /> Create template
+            </Link>
+            </button>
           </div>
 
           <div>
