@@ -1,6 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
-import SettingsLayout from '../../SettingsLayout'
+import SettingsLayout from "../../SettingsLayout";
 import { FaPlus } from "react-icons/fa6";
 import Table from "@/components/Table";
 import Link from "next/link";
@@ -249,8 +249,8 @@ export default function TamplateSetting() {
     }
   ]
 
-  const [viewTamplate, setViewTamplate] = useState(false)
-  const clieckref = useRef(null)
+  const [viewTemplate, setViewTemplate] = useState(false);
+  const clickRef = useRef(null);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -259,92 +259,77 @@ export default function TamplateSetting() {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentItems = items.slice(startIndex, startIndex + itemsPerPage);
 
-  const permission = [
-    {
-      Role: "admin"
-    },
-    {
-      Role: "User"
-    },
-    {
-      Role: "Supervisor"
-    },
-  ]
+  const handleClickOutside = (e) => {
+    if (clickRef.current && !clickRef.current.contains(e.target)) {
+      setViewTemplate(false);
+    }
+  };
 
+  // ==== TABLE HEADERS ====
   const TableHeads = [
-    { Title: "No", key:"No", width: '5%' },
-    { Title: "Template name",key:"TemplateName", width: '20%' },
-    { Title: "Template type",key:"TemplateType", width: '15%' },
-    { Title: "Subject",key:"Subject", width: '20%' },
-    { Title: "Permission",key:"Permission", width: '40%', render: (row) => <span className="text-blue-500">{row.Role}</span> },
-    { Title: "Action",key:"Action", width: '40%' },
+    { Title: "No", key: "No", width: "4%" },
+    { Title: "Template name", key: "TemplateName", width: "15%" },
+    { Title: "Template type", key: "TemplateType", width: "30%" },
+    { Title: "Subject", key: "Subject", width: "30%" },
+    {
+      Title: "Permission",
+      key: "Permission",
+      width: "15%",
+      render: (row) => (
+        <>
+          {row.Permission.map((role, idx) => (
+            <span
+              key={idx}
+              className={`${
+                role === "Admin"
+                  ? "text-[#E5D416] bg-[#FFFEF5]"
+                  : role === "User"
+                  ? "text-[#5069E5] bg-[#F7F9FF]"
+                  : "text-[#1B654A] bg-[#F7FFFC]"
+              } px-2 py-1 rounded-full mx-2`}
+            >
+              {role}
+            </span>
+          ))}
+        </>
+      ),
+    },
+    {
+      Title: "Action",
+      key: "Action",
+      width: "6%",
+      render: (row) => (
+        <span
+          onClick={() => setViewTemplate(true)}
+          className="text-[#0D2080] cursor-pointer"
+        >
+          {row.Action}
+        </span>
+      ),
+    },
   ];
 
-  const hendleClickOutSite = (e) => {
-    if (clieckref.current.contains(e.target) === false) {
-      setViewTamplate(false)
-    }
-  }
   return (
     <>
-
       <SettingsLayout>
         <div>
-          <div className='flex justify-end'>
-            <button className='bg-[#5069E5] text-sm text-[#ffffff] px-3 py-2  rounded-sm'>
-              <Link href='/settings/template/createTemplate' className='flex items-center gap-4'>
-            <FaPlus /> Create template
-            </Link>
+          {/* ==== CREATE TEMPLATE BUTTON ==== */}
+          <div className="flex justify-end">
+            <button className="bg-[#5069E5] text-sm text-[#ffffff] px-3 py-2 rounded-sm">
+              <Link
+                href="/settings/template/createTemplate"
+                className="flex items-center gap-4"
+              >
+                <FaPlus /> Create template
+              </Link>
             </button>
           </div>
 
-          <div>
+          {/* ==== TABLE ==== */}
+          <Table TableHeads={TableHeads} TableRows={currentItems} />
 
-            <Table TableHeads={TableHeads} TableRows={currentItems}>
-              {
-                permission.map((role, idx) =>
-                  <span key={idx} className={`${role.Role === "admin" && "text-[#E5D416] bg-[#FFFEF5]"} ${role.Role === "User" && "text-[#5069E5] bg-[#F7F9FF]"} ${role.Role === "Supervisor" && "text-[#1B654A] bg-[#F7FFFC]"} px-2 py-1 rounded-full mx-2`}>{role.Role}</span>
-                )
-              }
-            </Table>
-
-
-
-            {/* <table className='w-full my-6'>
-              <thead className='' >
-                <tr className='bg-[#D9DFFF] w-full '>
-                  <th className='text-center border-b-3 border-r-3 font-medium text-[#0C0C0D] py-[22px] border-[#F0F0F2] rounded-b-xl rounded-tl-2xl w-[4%]'>No</th>
-                  <th className='text-left pl-4 border-b-3 border-r-3 font-medium text-[#0C0C0D] py-[22px] border-[#F0F0F2] rounded-b-xl w-[15%]'>Template name </th>
-                  <th className='text-left pl-4 border-b-3 border-r-3 font-medium text-[#0C0C0D] py-[22px] border-[#F0F0F2] rounded-b-xl w-[30%]'>Template type</th>
-                  <th className='text-left pl-4 border-b-3 border-r-3 font-medium text-[#0C0C0D] py-[22px] border-[#F0F0F2] rounded-b-xl w-[30%]'>Subject</th>
-                  <th className='text-left pl-4 border-b-3 border-r-3 font-medium text-[#0C0C0D] py-[22px] border-[#F0F0F2] rounded-b-xl w-[15%]'>Permission</th>
-                  <th className='text-center border-b-3 border-[#F0F0F2] font-medium py-[22px]  rounded-b-xl rounded-tr-2xl w-[6%]'>Action</th>
-                </tr>
-              </thead>
-              <tbody className='bg-white'>
-                {
-                  currentItems.map((item, idx) =>
-                    <tr key={idx} >
-                      <td className='border-b-3 border-r-3 py-[22px] border-[#F0F0F2] rounded-xl p-2 text-center'>{item.No}</td>
-                      <td className='border-b-3 pl-4 border-r-3 py-[22px] border-[#F0F0F2] rounded-xl p-2 text-left'>{item.TemplateName}</td>
-                      <td className='border-b-3 pl-4 border-r-3 py-[22px] border-[#F0F0F2] rounded-xl p-2 text-left'>{item.TemplateType}</td>
-                      <td className='border-b-3 pl-4 border-r-3 py-[22px] border-[#F0F0F2] rounded-xl p-2 text-left'>{item.Subject}</td>
-                      <td className='border-b-3 pl-4 border-r-3 py-[22px] border-[#F0F0F2] rounded-xl p-2 text-left'>
-
-                      </td>
-                      <td onClick={() => setViewTamplate(true)} className='border-b-3 border-[#F0F0F2] py-[22px] rounded-xl p-2 text-center text-[#0D2080]'>View</td>
-                    </tr>
-                  )
-                }
-
-
-              </tbody>
-            </table> */}
-
-          </div>
-
-          <div className='mb-10 py-6'>
-
+          {/* ==== PAGINATION ==== */}
+          <div className="mb-10 py-6">
             <div className="flex items-center justify-end gap-4">
               <button
                 onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
@@ -358,10 +343,11 @@ export default function TamplateSetting() {
                 <button
                   key={i}
                   onClick={() => setCurrentPage(i + 1)}
-                  className={`px-3 py-1 transition ${currentPage === i + 1
-                    ? "bg-[#D9DFFF] text-black rounded-full"
-                    : "hover:bg-white border border-[#CED2E5] hover:rounded-full rounded-sm  duration-300"
-                    }`}
+                  className={`px-3 py-1 transition ${
+                    currentPage === i + 1
+                      ? "bg-[#D9DFFF] text-black rounded-full"
+                      : "hover:bg-white border border-[#CED2E5] hover:rounded-full rounded-sm  duration-300"
+                  }`}
                 >
                   {i + 1}
                 </button>
@@ -375,24 +361,36 @@ export default function TamplateSetting() {
                 Next
               </button>
             </div>
-
           </div>
         </div>
       </SettingsLayout>
 
-      <div onClick={hendleClickOutSite} className={`w-screen h-screen ${!viewTamplate && 'hidden'}  ${viewTamplate && 'absolute top-0 left-0 z-auto'} flex justify-center items-center shadow-2xl bg-[#00000052] `}>
-        <div ref={clieckref} className='bg-white w-[427px] h-[294px] p-12 rounded-[8px] shadow '>
+      {/* ==== TEMPLATE VIEW MODAL ==== */}
+      <div
+        onClick={handleClickOutside}
+        className={`w-screen h-screen ${
+          !viewTemplate && "hidden"
+        } ${viewTemplate && "absolute top-0 left-0 z-auto"} flex justify-center items-center shadow-2xl bg-[#00000052]`}
+      >
+        <div
+          ref={clickRef}
+          className="bg-white w-[427px] h-[294px] p-12 rounded-[8px] shadow"
+        >
           <div className="text-black">
             <h2>
               Hello,
-              <br />Timesheet is submit for client : client_name
-              <br />for time period: start_date To end_date
-              <br /> Please check and approve.
-              <br />Thank you.
+              <br />
+              Timesheet is submitted for client : client_name
+              <br />
+              for time period: start_date To end_date
+              <br />
+              Please check and approve.
+              <br />
+              Thank you.
             </h2>
           </div>
         </div>
       </div>
     </>
-  )
+  );
 }
