@@ -1,7 +1,8 @@
 import React from 'react'
+import Scheduler from './Scheduler'
 
 export default function scheduler() {
   return (
-    <div>This is Scheduler page</div>
+    <Scheduler/>
   )
 }
