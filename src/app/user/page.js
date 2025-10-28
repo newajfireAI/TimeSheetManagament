@@ -11,14 +11,7 @@ import Dropdown from "@/components/Dropdown";
 
 const page = () => {
   const [showPass, setShowPass] = useState(false);
-  const [showNewPass, setShowNewPass] = useState(false);
-  const [Role, setRole] = useState("User");
-  const [showRole, setShowRole] = useState(false);
-  const [Gender, setGender] = useState("Male");
-  const [showGender, setShowGender] = useState(false);
-
-  const roles = ["User", "Vender", "Employee"];
-  const gender = ["Male", "Female", "Others"];
+ 
   const [open, setOpen] = useState(false);
 
   const handleOptionSelect = (option) => {

@@ -9,6 +9,7 @@ const Dropdown = ({
   onSelect,
   className,
   inputClass,
+  spanClass,
 }) => {
   const [selected, setSelected] = useState("");
   const [show, setShow] = useState(false);
@@ -20,7 +21,6 @@ const Dropdown = ({
     if (onSelect) onSelect(value);
   };
 
-  // 👉 Outside click handler
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -33,11 +33,14 @@ const Dropdown = ({
   }, []);
 
   return (
-    <div ref={dropdownRef} className={`flex flex-col gap-2 w-full relative ${className}`}>
+    <div
+      ref={dropdownRef}
+      className={`flex flex-col gap-2 w-full relative ${className}`}
+    >
       {/* Label */}
       <label className="font-roboto text-[#000000] text-[16px]">
         {label}
-        <span className="text-[#F46B6A]">*</span>
+        <span className={`text-[#F46B6A] ${spanClass}`}>*</span>
       </label>
 
       {/* Input Box */}
@@ -58,7 +61,7 @@ const Dropdown = ({
 
         {/* Dropdown Menu */}
         <div
-          className={`absolute left-0 top-[105%] w-full bg-white border border-[#CED2E5] rounded-md shadow-md font-roboto text-[14px] text-[#333333] z-30 transition-all duration-300 text-center ${
+          className={`absolute left-0 top-[105%] w-full bg-white border border-[#CED2E5] rounded-md shadow-md font-roboto text-[14px] text-[#333333] z-30 transition-all duration-300 text-center overflow-y-scroll hide-scrollbar ${
             show
               ? "opacity-100 visible max-h-60 overflow-auto"
               : "opacity-0 invisible max-h-0 overflow-hidden"
