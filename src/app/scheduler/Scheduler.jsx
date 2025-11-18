@@ -1,4 +1,5 @@
 "use client";
+import Dropdown from "@/components/Dropdown";
 import cn from "@/libs/cn";
 import React, { useState } from "react";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
@@ -44,19 +45,13 @@ export default function MonthDays() {
         <>
             <div className="w-full">
 
-                <div className="relative inline-flex" onClick={() => setShowMonth(!showMonth)}>
-                    <input readOnly className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded " Value={monthNum} />
-
-                    <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
-                        {showMonth ? <FaCaretUp /> : <FaCaretDown />}
-                    </div>
-
-                    <div className={`w-full text-center bg-white font-inter text-[14px] text-[#333333] z-30 absolute ${showMonth ? "opacity-100 h-auto visible overflow-auto" : "opacity-0 h-0 invisible overflow-hidden"}`}>
-                        {Months.map((month, idx) => (
-                            <div key={idx} onClick={() => { setMonthNum(month); setShowMonth(false); }} className="py-2 hover:bg-[#5069E5] hover:text-white cursor-pointer">{month}</div>
-                        ))}
-                    </div>
-                </div>
+                <Dropdown
+                  label="Timesheet period"
+                  placeholder="Select Timesheet Period"
+                  options={["Weekly", "Monthly", "Yearly"]}
+                  onSelect={handleOptionSelect}
+                  className='col-span-2'
+                  />
 
                 <div className="flex items-center justify-between p-4">
                     {days.map(({ day, isToday, isPast, isFriday, isSaturday }) => (
