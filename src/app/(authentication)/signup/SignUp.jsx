@@ -1,24 +1,25 @@
 "use client";
-import useAxiosPublic from "@/hooks/AxiosPublic";
 import { apiFetch } from "@/libs/apiFetch";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function SignUp() {
   const [viewPass, setViewPass] = useState(false);
   const [viewConPass, setViewConPass] = useState(false);
   const [error, setError] = useState("");
-  const AxiosPublic = useAxiosPublic();
+  const navigate = useRouter("")
+
 
   const {
     register,
     handleSubmit,
-    // reset,
-    // watch,
     formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = async (formData) => {
@@ -36,17 +37,51 @@ export default function SignUp() {
     fd.append("phone", formData.mobile);
     fd.append("password", formData.password);
 
-    const res = await apiFetch("/register", {
-      method: "POST",
-      body: fd,
-    });
+    try {
+      const res = await apiFetch("/register", {
+        method: "POST",
+        body: fd,
+      });
 
-    const result = await res.json();
+      const result = await res.json();
+
+      if (result.success === true) {
+        navigate.push("/login")
+        toast("Registration Succesfull", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light"
+        });
+
+      } else {
+        toast("This Email is already used. try another", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light"
+        });
+      }
+    } catch (error) {
+      console.log("Internal Server Error", error);
+    } finally {
+      reset();
+    }
+
     console.log(result);
   };
 
   return (
     <div className="h-screen flex justify-center items-center text-black">
+      <ToastContainer />
       <div className="bg-[#FFFFFF] w-[1175px]  z-10 border border-[#CED2E5] shadow rounded-[16px] grid grid-cols-2">
         <div className="w-full ">
           <Image
