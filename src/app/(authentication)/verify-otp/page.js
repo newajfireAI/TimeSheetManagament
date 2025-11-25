@@ -1,8 +1,8 @@
 import React from 'react'
-import SendOTP from './SendOTP'
+import VerifyOTP from './verifyOTP'
 
 export default function page() {
   return (
-    <SendOTP/>
+    <VerifyOTP />
   )
 }

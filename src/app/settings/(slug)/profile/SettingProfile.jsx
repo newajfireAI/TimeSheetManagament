@@ -65,22 +65,22 @@ export default function SettingProfile() {
 
           <div className="flex justify-between gap-[2%] mt-4 ">
             <Dropdown
-                  label="Gender"
-                  placeholder="Select Gender"
-                  options={["Male", "Female", "Others"]}
-                  onSelect={handleOptionSelect}
-                  className="mt-4"
-                  spanClass="hidden"
-                  />
+              label="Gender"
+              placeholder="Select Gender"
+              options={["Male", "Female", "Others"]}
+              onSelect={handleOptionSelect}
+              className="mt-4"
+              spanClass="hidden"
+            />
 
-           <Dropdown
-                  label="Blood Group"
-                  placeholder="Select Blood Group"
-                  options={["A+", "A−", "B+", "B−", "AB+", "AB−", "O+", "O−"]}
-                  onSelect={handleOptionSelect}
-                  className="mt-4 "
-                  spanClass="hidden"
-                  />
+            <Dropdown
+              label="Blood Group"
+              placeholder="Select Blood Group"
+              options={["A+", "A−", "B+", "B−", "AB+", "AB−", "O+", "O−"]}
+              onSelect={handleOptionSelect}
+              className="mt-4 "
+              spanClass="hidden"
+            />
           </div>
 
           <div className="flex flex-col gap-2 mt-[26px] w-full  ">

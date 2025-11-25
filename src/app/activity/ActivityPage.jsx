@@ -18,7 +18,7 @@ export default function ActivityPage() {
         { Title: "No", key: "No", width: "5%" },
         { Title: "Created by", key: "Created_by", width: "20%" },
         { Title: "Date", key: "Date", width: "15%" },
-        { Title: "Role", key: "Role", width: "20%"},
+        { Title: "Role", key: "Role", width: "20%" },
         { Title: "Activities", key: "Activities", width: "40%" },
     ];
 

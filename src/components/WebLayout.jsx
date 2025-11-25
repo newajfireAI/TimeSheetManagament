@@ -6,45 +6,40 @@ import Sidebar from "@/components/Sidebar";
 
 function WebLayout({ children }) {
     const pathname = usePathname();
-    
-    
+
+    const isAuthPage =
+        pathname === '/login' ||
+        pathname === '/signup' ||
+        pathname === '/forgot-password' ||
+        pathname === '/verify-otp' ||
+        pathname === '/change-password';
 
     return (
-
         <>
-            {
-                ((pathname !== '/') &&
-                (pathname !== '/login') &&
-                (pathname !== '/forgot-password') &&
-                (pathname !== '/send-otp') &&
-                (pathname !== '/change-password') &&
-                (pathname !== '/signup')) ?
-                    <>
-                        {/* Header */}
-                        <section className="w-full h-[80px]">
-                            <Navbar />
-                        </section>
+            {!isAuthPage ? (
+                <>
+                    {/* Header */}
+                    <section className="w-full h-[80px]">
+                        <Navbar />
+                    </section>
 
-                        {/* Sidebar + Content */}
-                        <div className="fixed flex items-center justify-between w-screen h-[calc(100vh-80px)]">
-                            <div className="w-[5%] h-full">
-                                <Sidebar />
-                            </div>
-                            <div className="w-[95%] px-12 pt-12 bg-[#F0F0F2] h-full overflow-y-scroll hide-scrollbar">
-                                {children}
-                            </div>
+                    {/* Sidebar + Content */}
+                    <div className="fixed flex items-center justify-between w-screen h-[calc(100vh-80px)]">
+                        <div className="w-[5%] h-full">
+                            <Sidebar />
                         </div>
-                    </>
-                    :
-                    <>
-                        <div className="w-screen h-screen bg-[#F0F0F2]">
+                        <div className="w-[95%] px-12 pt-12 bg-[#F0F0F2] h-full overflow-y-scroll hide-scrollbar">
                             {children}
                         </div>
-                    </>
-
-            }
+                    </div>
+                </>
+            ) : (
+                <div className="w-screen h-screen bg-[#F0F0F2]">
+                    {children}
+                </div>
+            )}
         </>
-    )
+    );
 }
 
-export default WebLayout
+export default WebLayout;

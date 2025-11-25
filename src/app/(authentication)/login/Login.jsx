@@ -9,82 +9,73 @@ import { toast, ToastContainer } from "react-toastify";
 
 export default function Login() {
   const [viewPass, setViewPass] = useState(false);
-  const navigate = useRouter();
+  const [rememberMe, setRememberMe] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm();
 
   const onSubmit = async (formData) => {
-    const fd = new FormData();
-    fd.append("email", formData.email);
-    fd.append("password", formData.password);
-
-    console.log(fd);
-    
-
+    setIsLoading(true);
     try {
       const res = await apiFetch("/login", {
         method: "POST",
-        body: fd,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
       });
 
       const result = await res.json();
 
-      console.log(result);
+      if (res.status === 401 || res.status === 403) {
+        toast.error(result.message || "Login Failed", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+      } else if (res.ok) {
+        // Set cookie expiry based on Remember Me checkbox
+        const maxAge = rememberMe ? 60 * 60 * 24 * 30 : 60 * 60 * 24 * 7; // 30 days or 7 days
+        const isSecure = window.location.protocol === 'https:';
 
-        if (res.status === 401) {
-        //   navigate.push("/login");
-          toast(`${result.message}`, {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-        } else if (res.status=== 403){
-
-            toast(`${result.message}`, {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-
-        } else{ 
-          toast("Login Successfull", {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
+        document.cookie = `auth_token=${result.token}; path=/; max-age=${maxAge}; ${isSecure ? 'Secure;' : ''} SameSite=Strict`;
+        if (result.role) {
+          document.cookie = `user_role=${result.role}; path=/; max-age=${maxAge}; ${isSecure ? 'Secure;' : ''} SameSite=Strict`;
         }
-    } catch (error) {
-      console.log("Internal Server Error", error);
-    } finally {
-      //   reset();
-    }
 
-    console.log(result);
+        toast.success("Login Successful", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+
+        router.push("/");
+      } else {
+        toast.error(result.message || "Something went wrong", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+      }
+    } catch (error) {
+      console.error("Login Error", error);
+      toast.error(`Error: ${error.message || "An unexpected error occurred"}`, {
+        position: "top-right",
+        autoClose: 5000,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="h-screen flex justify-center items-center">
-        <ToastContainer />
+      <ToastContainer />
       <div className="fixed top-0 left-0 w-full h-1/2 bg-[url('/assets/loginbanner.png')] bg-no-repeat bg-cover bg-center z-0"></div>
       <div className="bg-[#FFFFFF] w-[600px] h-[600px] z-10 border border-[#CED2E5] shadow rounded-[16px]">
         <div className="w-full h-full flex flex-col justify-center items-center px-24 py-10">
@@ -121,7 +112,7 @@ export default function Login() {
                 name="password"
                 {...register("password", { required: true })}
               />
-              {errors.email && (
+              {errors.password && (
                 <span className="text-red-600">Password is required</span>
               )}
               <p
@@ -135,16 +126,28 @@ export default function Login() {
               <div>
                 <input
                   type="checkbox"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
                   className="checkbox checkbox-sm text-black bg-[#F0F0F2] border-none -mt-[2px]"
                 />
               </div>
               <p className="text-[#6D6E73]">Remember me</p>
             </div>
 
-            <input
+            <button
               type="submit"
-              className="bg-[#5069E5] text-white w-full py-4 rounded-[4px] font-semibold text-xl"
-            />
+              disabled={isLoading}
+              className="bg-[#5069E5] text-white w-full py-4 rounded-[4px] font-semibold text-xl cursor-pointer hover:bg-[#3d52c7] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+            >
+              {isLoading ? (
+                <div className="flex items-center gap-2">
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  <span>Logging in...</span>
+                </div>
+              ) : (
+                "Login"
+              )}
+            </button>
           </form>
 
           <div className="text-center text-base text-black space-y-2">

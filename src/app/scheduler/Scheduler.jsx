@@ -5,8 +5,9 @@ import React, { useState } from "react";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 
 export default function MonthDays() {
-    const [monthNum, setMonthNum] = useState('')
+    const [monthNum, setMonthNum] = useState('January')
     const [showMonth, setShowMonth] = useState(false)
+    const [timesheetPeriod, setTimesheetPeriod] = useState('')
 
     const Months = ["January",
         "February",
@@ -20,6 +21,10 @@ export default function MonthDays() {
         "October",
         "November",
         "December"]
+
+    const handleOptionSelect = (option) => {
+        setTimesheetPeriod(option);
+    };
 
     const year = new Date().getFullYear();
     const month = Months.indexOf(monthNum)
@@ -46,12 +51,12 @@ export default function MonthDays() {
             <div className="w-full">
 
                 <Dropdown
-                  label="Timesheet period"
-                  placeholder="Select Timesheet Period"
-                  options={["Weekly", "Monthly", "Yearly"]}
-                  onSelect={handleOptionSelect}
-                  className='col-span-2'
-                  />
+                    label="Timesheet period"
+                    placeholder="Select Timesheet Period"
+                    options={["Weekly", "Monthly", "Yearly"]}
+                    onSelect={handleOptionSelect}
+                    className='col-span-2'
+                />
 
                 <div className="flex items-center justify-between p-4">
                     {days.map(({ day, isToday, isPast, isFriday, isSaturday }) => (
