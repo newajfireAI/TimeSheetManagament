@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 const roboto = Roboto({
   variable: "--font-roboto",
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
 });
 
 export const metadata = {
@@ -31,7 +32,7 @@ export default function RootLayout({ children }) {
       >
 
         <WebLayout>{children}</WebLayout>
-        
+
       </body>
     </html>
   );

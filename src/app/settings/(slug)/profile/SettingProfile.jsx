@@ -1,17 +1,40 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SettingsLayout from "../../SettingsLayout";
 import Image from "next/image";
 
 import { FaCaretDown, FaCaretUp, FaLink } from "react-icons/fa";
 import Dropdown from "@/components/Dropdown";
+import { apiFetch } from "@/libs/apiFetch";
 
 export default function SettingProfile() {
-
+  const [user, setUser] = useState(null);
   const fileRef = useRef(null);
   const [fileName, setFileName] = useState("");
+  const [selectedImageUrl, setSelectedImageUrl] = useState(null);
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        // apiFetch automatically handles token from cookies
+        const response = await apiFetch("/profile", {
+          method: "GET",
+        });
+
+        const data = await response.json();
+
+
+        setUser(data);
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      }
+    };
+
+    getUser();
+  }, []);
+
+
   const handleOptionSelect = (option) => {
-    console.log("Selected:", option);
   };
 
   return (
@@ -40,6 +63,7 @@ export default function SettingProfile() {
             <input
               className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
               placeholder="Name"
+              defaultValue={user?.name}
             />
           </div>
 
@@ -50,6 +74,7 @@ export default function SettingProfile() {
             <input
               className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
               placeholder="example@gmail.com"
+              defaultValue={user?.email}
             />
           </div>
           <div className="flex flex-col gap-2 mt-4 w-full  ">
@@ -60,6 +85,7 @@ export default function SettingProfile() {
             <input
               className="w-full bg-white outline-none py-[18px] px-4 text-[#6D6E73] font-roboto text-[16px] placeholder-[#6D6E73] border border-[#CED2E5] rounded "
               placeholder="Phone Number"
+              defaultValue={user?.phone}
             />
           </div>
 
@@ -71,7 +97,9 @@ export default function SettingProfile() {
               onSelect={handleOptionSelect}
               className="mt-4"
               spanClass="hidden"
+              value={user?.gender}
             />
+
 
             <Dropdown
               label="Blood Group"
@@ -91,7 +119,20 @@ export default function SettingProfile() {
               <input
                 type="file"
                 ref={fileRef}
-                onChange={(e) => setFileName(e.target.files[0]?.name || "")}
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  if (file) {
+                    setFileName(file.name);
+                    if (file.type.startsWith("image/")) {
+                      setSelectedImageUrl(URL.createObjectURL(file));
+                    } else {
+                      setSelectedImageUrl(null);
+                    }
+                  } else {
+                    setFileName("");
+                    setSelectedImageUrl(null);
+                  }
+                }}
                 className="hidden"
               />
 
@@ -101,9 +142,17 @@ export default function SettingProfile() {
                 readOnly
                 value={fileName}
               />
+
               <div className="w-6 h-6 bg-[#F2F4FF] flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 text-[#6D6E73]">
                 <FaLink />
               </div>
+              {selectedImageUrl && (
+                <img
+                  src={selectedImageUrl}
+                  alt="Signature Preview"
+                  className="absolute top-1/2 -translate-y-1/2 right-4 h-6 w-auto object-contain"
+                />
+              )}
             </div>
           </div>
 

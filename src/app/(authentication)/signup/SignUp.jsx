@@ -71,12 +71,11 @@ export default function SignUp() {
         });
       }
     } catch (error) {
-      console.log("Internal Server Error", error);
+      // Handle error silently or show user-friendly message
+      setError("An error occurred during registration. Please try again.");
     } finally {
       reset();
     }
-
-    console.log(result);
   };
 
   return (

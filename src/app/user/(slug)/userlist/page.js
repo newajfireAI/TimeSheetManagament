@@ -169,12 +169,12 @@ export default function UserList() {
                 return (
                     <select
                         value={row.role}
-                        onChange={(e) =>
-                            console.log(`Role changed to ${e.target.value} for ${row.name}`)
-                        }
+                        onChange={(e) => {
+                            // TODO: Implement role update API call
+                            // For now, just update local state
+                        }}
                         className={`px-3 py-1 rounded-full text-sm font-medium cursor-pointer ${style[row.role] || "bg-gray-100 text-gray-600"}`}
                     >
-                        <option value="Admin">{row.role}</option>
                         <option value="Admin">Admin</option>
                         <option value="User">User</option>
                         <option value="Supervisor">Supervisor</option>
@@ -196,9 +196,10 @@ export default function UserList() {
                 return (
                     <select
                         value={row.status}
-                        onChange={(e) =>
-                            console.log(`Status changed to ${e.target.value} for ${row.name}`)
-                        }
+                        onChange={(e) => {
+                            // TODO: Implement status update API call
+                            // For now, just update local state
+                        }}
                         className={`px-3 py-1 rounded-full text-sm font-medium cursor-pointer ${style[row.status] || "bg-gray-100 text-gray-600"}`}
                     >
                         <option value="Approved">Approved</option>
